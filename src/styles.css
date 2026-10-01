@@ -147,8 +147,10 @@
 @utility animate-slow-spin { animation: slow-spin 90s linear infinite; }
 @utility animate-line { animation: line-down 2.4s ease-in-out infinite; }
 @utility animate-rise { animation: rise 1.2s cubic-bezier(0.2, 0.7, 0.1, 1) both; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-0.6deg); } 50% { transform: translateY(-10px) rotate(0.6deg); } }
+@utility animate-float { animation: float 9s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
-  .animate-drift, .animate-slow-spin, .animate-line, .animate-rise { animation: none; }
+  .animate-drift, .animate-slow-spin, .animate-line, .animate-rise, .animate-float { animation: none; }
 }

@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
+import logo from "@/assets/aurelius-logo.jpg.asset.json";
+import { Awards } from "@/components/Awards";
 import dayWestern from "@/assets/day-western.jpg";
 import dayTraditional from "@/assets/day-traditional.jpg";
 import {
@@ -54,6 +56,7 @@ function Index() {
       <Secretariat />
       <ExecutiveBoard />
       <Schedule />
+      <Awards />
       <Faq />
       <Contact />
       <Footer />
@@ -202,10 +205,10 @@ function Countdown() {
 }
 
 function Hero() {
-  const ref = useRef<HTMLImageElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const on = () => {
-      if (ref.current) ref.current.style.translate = `0 ${window.scrollY * 0.25}px`;
+      if (ref.current) ref.current.style.translate = `0 ${window.scrollY * 0.15}px`;
     };
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
@@ -213,23 +216,15 @@ function Hero() {
 
   return (
     <section id="home" className="surface-dark relative flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
-      <div className="absolute inset-0">
-        <img
-          ref={ref}
-          src={heroGlobe}
-          alt=""
-          width={1920}
-          height={1088}
-          className="animate-drift h-full w-full object-cover object-center opacity-70 md:object-[70%_50%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/60" />
-      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklch,var(--gold)_14%,transparent),transparent_60%)]" />
 
-      <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-20 md:pb-20 md:pt-32">
+      <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-20 md:pt-32">
+        <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-12">
+          <div className="order-2 lg:order-1">
         <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
           <span className="h-px w-10 bg-gold" /> Model United Nations
         </div>
-        <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[13.5rem]">
+        <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[9.5rem] xl:text-[11rem]">
           <span className="block overflow-hidden"><span className="animate-rise block">Aurelius</span></span>
           <span className="block overflow-hidden">
             <span className="animate-rise block italic text-gold" style={{ animationDelay: "0.15s" }}>
@@ -239,6 +234,20 @@ function Hero() {
         </h1>
 
         <Countdown />
+          </div>
+          <div ref={ref} className="order-1 mx-auto w-full max-w-[220px] sm:max-w-[300px] lg:order-2 lg:max-w-[440px] lg:self-center">
+            <div className="animate-float relative">
+              <div className="absolute -inset-4 border border-gold/25" />
+              <img
+                src={logo.url}
+                alt="Aurelius MUN official logo"
+                width={896}
+                height={811}
+                className="relative block h-auto w-full shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
 
         <div className="mt-5 grid gap-4 border-t border-line-dark pt-6 md:mt-8 md:grid-cols-[1fr_1fr_auto] md:items-end md:gap-6">
           <div>
@@ -482,10 +491,10 @@ function Secretariat() {
         <div className="reveal mb-16 grid gap-8 border-t border-border pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
           <p className="eyebrow text-gold">A new beginning</p>
           <div className="max-w-3xl">
-            <p className="display text-3xl leading-[1.15] sm:text-4xl md:text-5xl">Welcome to the first edition of Aurelius MUN.</p>
-            <p className="mt-7 text-base leading-relaxed text-muted-foreground">As a new initiative, Aurelius MUN is an invitation to listen closely, speak thoughtfully and meet different perspectives with curiosity. We hope these two days make room for meaningful debate, diplomacy and collaboration.</p>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">We look forward to welcoming you to the conversation.</p>
-            <p className="eyebrow mt-8 text-gold">Savio Jose &amp; Aditya Kumar Singh</p>
+            <p className="display text-3xl leading-[1.15] sm:text-4xl md:text-5xl">“Every great legacy begins with a single, daring spark, turning ordinary moments into gold.</p>
+            <p className="mt-7 text-base leading-relaxed text-muted-foreground">As we step into the inaugural edition of <strong className="text-foreground">Aurelius MUN</strong>, we aren’t just launching a conference—we are breathing life into a shared vision and setting the cornerstone for a remarkable tradition. This very first edition means everything to us. It represents the courage to start from scratch, the boldness to dream without limits, and the unwavering belief that young minds hold the power to shape a better tomorrow.</p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">The name <strong className="text-foreground">Aurelius</strong>—derived from the Latin word meaning <em>golden</em> or <em>gilded</em>—carries a profound legacy of wisdom, resilience, and quiet strength. Just like the name implies, we believe that true brilliance isn't just about eloquence; it is forged through thoughtful debate, empathy, and the pursuit of truth under pressure. This name reflects the kind of leaders we strive to cultivate: grounded yet radiant, resilient in the face of complex global challenges, and deeply committed to uplifting one another.</p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
         <div className="grid gap-10 sm:grid-cols-2 lg:max-w-4xl">
@@ -620,10 +629,10 @@ function Faq() {
 function Contact() {
   const c = conference.contact;
   const rows = [
-    { label: "Official email", value: c.email, href: c.email ? `mailto:${c.email}` : null },
-    { label: "Instagram", value: c.instagram, href: c.instagram },
-    { label: "Phone", value: c.phone, href: c.phone ? `tel:${c.phone}` : null },
-    { label: "Registration contact", value: c.registrationContact, href: null },
+    { label: "Official email", value: c.email, href: c.email ? `mailto:${c.email}` : null, external: false },
+    { label: "Instagram", value: c.instagram ? "@aureliusjmcmun" : null, href: c.instagram, external: true },
+    { label: "Phone", value: c.phone, href: c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : null, external: false },
+    { label: "Registration contact", value: c.registrationContact, href: null, external: false },
   ];
   return (
     <section id="contact" className="py-24 md:py-36">
@@ -640,9 +649,9 @@ function Contact() {
               {rows.map((r) => (
                 <div key={r.label} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
                   <dt className="eyebrow text-muted-foreground">{r.label}</dt>
-                  <dd className="text-right">
+                  <dd className="break-all text-right">
                     {r.value ? (
-                      r.href ? <a href={r.href} className="link-underline">{r.value}</a> : r.value
+                      r.href ? <a href={r.href} className="link-underline" {...(r.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{r.value}</a> : r.value
                     ) : (
                       <span className="eyebrow text-gold">To Be Announced</span>
                     )}
@@ -696,9 +705,9 @@ function Footer() {
           <div className="md:col-span-3">
             <p className="eyebrow text-gold">Connect</p>
             <ul className="mt-5 space-y-3 text-ivory/70">
-              <li>Instagram — {conference.contact.instagram ? <a className="link-underline" href={conference.contact.instagram}>Follow</a> : "TBA"}</li>
-              <li>Email — {conference.contact.email ?? "TBA"}</li>
-              <li>Phone — {conference.contact.phone ?? "TBA"}</li>
+              <li>Instagram — {conference.contact.instagram ? <a className="link-underline" href={conference.contact.instagram} target="_blank" rel="noopener noreferrer">Follow</a> : "TBA"}</li>
+              <li>Email — {conference.contact.email ? <a className="link-underline" href={`mailto:${conference.contact.email}`}>{conference.contact.email}</a> : "TBA"}</li>
+              <li>Phone — {conference.contact.phone ? <a className="link-underline" href={`tel:${conference.contact.phone.replace(/\s/g, "")}`}>{conference.contact.phone}</a> : "TBA"}</li>
             </ul>
             <Button asChild variant="bare" className="btn-gold mt-8"><Link to="/register">Register Now</Link></Button>
           </div>

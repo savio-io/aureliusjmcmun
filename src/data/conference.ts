@@ -19,9 +19,9 @@ export const conference = {
   /** Replace with the real registration form URL when available. */
   registrationUrl: null as string | null,
   contact: {
-    email: null as string | null,
-    instagram: null as string | null, // e.g. "https://instagram.com/handle"
-    phone: null as string | null,
+    email: "aureliusjmcmun@gmail.com" as string | null,
+    instagram: "https://www.instagram.com/aureliusjmcmun/" as string | null,
+    phone: "+91 93184 69083" as string | null,
     registrationContact: null as string | null,
   },
 };
@@ -138,6 +138,15 @@ export const navLinks = [
   { label: "Committees", href: "#committees" },
   { label: "Conference", href: "#conference" },
   { label: "Secretariat", href: "#secretariat" },
+  { label: "Awards", href: "#awards" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
+];
+
+export const awards = [
+  { title: "Best Delegate", count: "1 per committee", prize: "Trophy + Medal + Certificate" },
+  { title: "High Commendation", count: "1 per committee", prize: "Medal + Certificate" },
+  { title: "Special Mention", count: "3 per committee", prize: "Certificate" },
+  { title: "Verbal Mention", count: "Number varies according to committee size", prize: "Certificate" },
+  { title: "Participation", count: "All remaining delegates", prize: "Certificate" },
 ];
