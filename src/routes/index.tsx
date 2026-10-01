@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
 import dayWestern from "@/assets/day-western.jpg";
 import dayTraditional from "@/assets/day-traditional.jpg";
@@ -123,9 +124,7 @@ function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a href="#register" className="btn-gold hidden sm:inline-flex">
-            Register Now
-          </a>
+          <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><Link to="/register">Register Now</Link></Button>
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen(!open)}
@@ -157,9 +156,7 @@ function Nav() {
               </li>
             ))}
           </ul>
-          <a href="#register" onClick={() => setOpen(false)} className="btn-gold w-full">
-            Register Now
-          </a>
+          <Button asChild variant="bare" className="btn-gold w-full"><Link to="/register" onClick={() => setOpen(false)}>Register Now</Link></Button>
         </Container>
       </div>
     </header>
@@ -167,6 +164,42 @@ function Nav() {
 }
 
 /* ---------------- hero ---------------- */
+
+const OPENING_TIME = new Date("2026-11-11T00:00:00+05:30").getTime();
+
+function Countdown() {
+  const [remaining, setRemaining] = useState<number | null>(null);
+  useEffect(() => {
+    const update = () => setRemaining(Math.max(0, OPENING_TIME - Date.now()));
+    update();
+    const interval = window.setInterval(update, 1000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const totalSeconds = Math.floor((remaining ?? 0) / 1000);
+  const values = [
+    { label: "Days", value: Math.floor(totalSeconds / 86400) },
+    { label: "Hours", value: Math.floor((totalSeconds % 86400) / 3600) },
+    { label: "Minutes", value: Math.floor((totalSeconds % 3600) / 60) },
+    { label: "Seconds", value: totalSeconds % 60 },
+  ];
+  return (
+    <div className="mt-8 md:mt-10" aria-label="Time until 11 November 2026">
+      <p className="eyebrow mb-4 text-gold">Until the first edition</p>
+      <div className="flex items-start gap-2 sm:gap-5">
+        {values.map((item, i) => (
+          <div key={item.label} className="flex items-start gap-2 sm:gap-5">
+            {i > 0 && <span aria-hidden="true" className="display text-2xl text-gold/70 sm:text-4xl">:</span>}
+            <div className="min-w-10 text-center sm:min-w-16">
+              <span className="display block tabular-nums text-3xl text-ivory sm:text-5xl" suppressHydrationWarning>{remaining === null ? "--" : String(item.value).padStart(2, "0")}</span>
+              <span className="mt-2 block text-[0.55rem] font-semibold uppercase tracking-widest text-ivory/60 sm:text-[0.65rem]">{item.label}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Hero() {
   const ref = useRef<HTMLImageElement>(null);
@@ -192,7 +225,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/60" />
       </div>
 
-      <Container className="relative flex flex-1 flex-col justify-end pb-24 pt-32 md:pb-28">
+      <Container className="relative flex flex-1 flex-col justify-end pb-16 pt-28 md:pb-20">
         <div className="eyebrow mb-8 flex items-center gap-4 text-gold">
           <span className="h-px w-10 bg-gold" /> Model United Nations
         </div>
@@ -205,7 +238,9 @@ function Hero() {
           </span>
         </h1>
 
-        <div className="mt-10 grid gap-8 border-t border-line-dark pt-8 md:grid-cols-[1fr_1fr_auto] md:items-end">
+        <Countdown />
+
+        <div className="mt-8 grid gap-6 border-t border-line-dark pt-6 md:grid-cols-[1fr_1fr_auto] md:items-end">
           <div>
             <p className="eyebrow text-ivory/50">Dates</p>
             <p className="mt-2 text-lg tracking-wide">{conference.datesShort}</p>
@@ -217,7 +252,7 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <a href="#register" className="btn-gold">Register Now</a>
+            <Button asChild variant="bare" className="btn-gold"><Link to="/register">Register Now</Link></Button>
             <a href="#about" className="btn-ghost">Explore the Conference</a>
           </div>
         </div>
@@ -293,7 +328,6 @@ function Details() {
   const stats = [
     { n: 3, label: "Committees" },
     { n: 2, label: "Days" },
-    { n: 2, label: "Delegate fee categories" },
   ];
   return (
     <section id="conference" className="surface-dark py-24 md:py-36">
@@ -307,7 +341,7 @@ function Details() {
               <p key={l} className="mt-2 text-ivory/70">{l}</p>
             ))}
           </div>
-          <div className="grid grid-cols-3 gap-4 lg:col-span-7">
+          <div className="grid grid-cols-2 gap-4 lg:col-span-7">
             {stats.map((s, i) => (
               <div key={s.label} className="reveal border-l border-line-dark pl-4 md:pl-6" style={{ transitionDelay: `${i * 120}ms` }}>
                 <p className="display text-6xl text-gold md:text-8xl"><Counter to={s.n} /></p>
@@ -421,9 +455,7 @@ function Register() {
               <p className="eyebrow text-ivory/60">{f.label}</p>
               <p className="display mt-8 text-7xl text-gold md:text-8xl">{f.price}</p>
               <p className="mt-6 min-h-12 text-ivory/70">{f.note}</p>
-              <a href={conference.registrationUrl} className="btn-gold mt-10 w-full">
-                Register Now <span aria-hidden>→</span>
-              </a>
+              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><Link to="/register">Register Now <span aria-hidden>→</span></Link></Button>
             </div>
           ))}
         </div>
@@ -446,8 +478,17 @@ function Secretariat() {
   return (
     <section id="secretariat" className="py-24 md:py-36">
       <Container>
-        <SectionHead index="VI" label="Leadership" title={<>The <em className="text-gold">Secretariat</em></>} />
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <SectionHead index="VI" label="First Edition" title={<>Message from the <em className="text-gold">Secretariat</em></>} />
+        <div className="reveal mb-16 grid gap-8 border-t border-border pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
+          <p className="eyebrow text-gold">A new beginning</p>
+          <div className="max-w-3xl">
+            <p className="display text-3xl leading-[1.15] sm:text-4xl md:text-5xl">Welcome to the first edition of Aurelius MUN.</p>
+            <p className="mt-7 text-base leading-relaxed text-muted-foreground">As a new initiative, Aurelius MUN is an invitation to listen closely, speak thoughtfully and meet different perspectives with curiosity. We hope these two days make room for meaningful debate, diplomacy and collaboration.</p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">We look forward to welcoming you to the conversation.</p>
+            <p className="eyebrow mt-8 text-gold">Savio Jose &amp; Aditya Kumar Singh</p>
+          </div>
+        </div>
+        <div className="grid gap-10 sm:grid-cols-2 lg:max-w-4xl">
           {secretariat.map((p, i) => (
             <figure key={p.name} className="reveal group" style={{ transitionDelay: `${i * 120}ms` }}>
               <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">
@@ -462,7 +503,7 @@ function Secretariat() {
               </div>
               <figcaption className="mt-6 border-t border-border pt-5">
                 <p className="display text-3xl">{p.name}</p>
-                <p className="eyebrow mt-2 text-muted-foreground">{p.role ?? "Secretariat profile coming soon"}</p>
+                <p className="eyebrow mt-2 text-muted-foreground">{p.role ?? "Photo coming soon"}</p>
               </figcaption>
             </figure>
           ))}
@@ -659,7 +700,7 @@ function Footer() {
               <li>Email — {conference.contact.email ?? "TBA"}</li>
               <li>Phone — {conference.contact.phone ?? "TBA"}</li>
             </ul>
-            <a href="#register" className="btn-gold mt-8">Register Now</a>
+            <Button asChild variant="bare" className="btn-gold mt-8"><Link to="/register">Register Now</Link></Button>
           </div>
         </div>
         <div className="flex flex-col justify-between gap-2 py-8 text-xs text-ivory/40 sm:flex-row">
