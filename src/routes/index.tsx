@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
-import logo from "@/assets/aurelius-logo.jpg.asset.json";
+import logo from "@/assets/aurelius-logo-motto.jpg.asset.json";
 import { Awards } from "@/components/Awards";
 import dayWestern from "@/assets/day-western.jpg";
 import dayTraditional from "@/assets/day-traditional.jpg";
@@ -51,6 +51,7 @@ function Index() {
       <About />
       <Details />
       <Committees />
+      <Agendas />
       <Days />
       <Register />
       <Secretariat />
@@ -65,6 +66,8 @@ function Index() {
 }
 
 /* ---------------- helpers ---------------- */
+
+const REG_URL = conference.registrationUrl ?? "/register";
 
 function SectionHead({
   index,
@@ -119,15 +122,15 @@ function Nav() {
           <span className="display text-2xl tracking-[0.12em]">AURELIUS</span>
           <span className="eyebrow text-gold">MUN</span>
         </a>
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-4 xl:gap-5 lg:flex">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="eyebrow link-underline text-ivory/75 hover:text-ivory">
+            <a key={l.href} href={l.href} className="eyebrow link-underline text-[0.62rem] tracking-[0.22em] text-ivory/75 hover:text-ivory">
               {l.label}
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><Link to="/register">Register Now</Link></Button>
+          <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen(!open)}
@@ -159,7 +162,7 @@ function Nav() {
               </li>
             ))}
           </ul>
-          <Button asChild variant="bare" className="btn-gold w-full"><Link to="/register" onClick={() => setOpen(false)}>Register Now</Link></Button>
+          <Button asChild variant="bare" className="btn-gold w-full"><a href={REG_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Register Now</a></Button>
         </Container>
       </div>
     </header>
@@ -261,7 +264,7 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="bare" className="btn-gold"><Link to="/register">Register Now</Link></Button>
+            <Button asChild variant="bare" className="btn-gold"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
             <a href="#about" className="btn-ghost">Explore the Conference</a>
           </div>
         </div>
@@ -391,13 +394,35 @@ function Committees() {
               </p>
               <div className="mt-auto pt-10">
                 <div className="h-px w-full bg-border transition-colors group-hover:bg-gold" />
-                <p className="eyebrow mt-4">
-                  Agenda — <span className="text-gold">{c.agenda ?? "To Be Announced"}</span>
-                </p>
+                <p className="eyebrow mt-4 text-gold">Agenda</p>
+                <p className="mt-2 text-sm leading-relaxed">{c.agenda ?? "To Be Announced"}</p>
               </div>
             </article>
           ))}
         </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ---------------- agendas ---------------- */
+
+function Agendas() {
+  return (
+    <section id="agendas" className="surface-dark py-24 md:py-36">
+      <Container>
+        <SectionHead index="III·II" label="Agendas" title={<>The <em className="text-gold">agendas</em></>} dark />
+        <ol className="border-t border-line-dark">
+          {committees.map((c, i) => (
+            <li key={c.short} className="reveal group grid gap-4 border-b border-line-dark py-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-12" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div>
+                <span className="eyebrow text-gold">{c.index}</span>
+                <p className="display mt-3 text-5xl transition-colors duration-500 group-hover:text-gold md:text-6xl">{c.short}</p>
+              </div>
+              <p className="display self-end text-2xl leading-snug text-ivory/90 sm:text-3xl md:text-4xl">{c.agenda ?? "To Be Announced"}</p>
+            </li>
+          ))}
+        </ol>
       </Container>
     </section>
   );
@@ -463,14 +488,12 @@ function Register() {
             >
               <p className="eyebrow text-ivory/60">{f.label}</p>
               <p className="display mt-8 text-7xl text-gold md:text-8xl">{f.price}</p>
-              <p className="mt-6 min-h-12 text-ivory/70">{f.note}</p>
-              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><Link to="/register">Register Now <span aria-hidden>→</span></Link></Button>
+              <p className="eyebrow mt-6 text-gold">{f.earlyBird}</p>
+              <p className="mt-4 min-h-12 text-ivory/70">{f.note}</p>
+              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button>
             </div>
           ))}
         </div>
-        <p className="reveal mt-10 text-center text-sm text-ivory/50">
-          Registration details and further conference information will be updated shortly.
-        </p>
       </Container>
     </section>
   );
@@ -563,7 +586,7 @@ function Schedule() {
   return (
     <section className="py-24 md:py-36">
       <Container>
-        <SectionHead index="VIII" label="Conference Schedule" title={<>Schedule <em className="text-gold">coming soon</em></>} />
+        <SectionHead index="VIII" label="Conference Schedule" title={<>Schedule</>} />
         <div className="grid gap-12 md:grid-cols-2">
           {schedule.map((d) => (
             <div key={d.day} className="reveal">
@@ -572,7 +595,8 @@ function Schedule() {
                 {d.items.map((it, i) => (
                   <li key={i} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
                     <span className="display text-2xl md:text-3xl">{it.title}</span>
-                    <span className="eyebrow shrink-0 text-muted-foreground">{it.time ?? "TBA"}</span>
+                    {it.time && <span className="eyebrow shrink-0 text-muted-foreground">{it.time}</span>}
+                    {!it.time && <span className="eyebrow shrink-0 text-gold">{String(i + 1).padStart(2, "0")}</span>}
                   </li>
                 ))}
               </ul>
@@ -632,7 +656,7 @@ function Contact() {
     { label: "Official email", value: c.email, href: c.email ? `mailto:${c.email}` : null, external: false },
     { label: "Instagram", value: c.instagram ? "@aureliusjmcmun" : null, href: c.instagram, external: true },
     { label: "Phone", value: c.phone, href: c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : null, external: false },
-    { label: "Registration contact", value: c.registrationContact, href: null, external: false },
+    { label: "Location", value: "Open in Google Maps", href: conference.venue.mapsUrl, external: true },
   ];
   return (
     <section id="contact" className="py-24 md:py-36">
@@ -669,7 +693,7 @@ function Contact() {
                 <div className="relative flex h-full flex-col items-center justify-center p-8 text-center">
                   <span className="mb-6 block h-3 w-3 rounded-full bg-gold ring-8 ring-gold/20" />
                   <p className="display text-3xl">Greater Noida</p>
-                  <p className="eyebrow mt-3 text-ivory/60">Map coming soon</p>
+                  <a href={conference.venue.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-6">View on Google Maps</a>
                 </div>
               </>
             )}
@@ -709,7 +733,7 @@ function Footer() {
               <li>Email — {conference.contact.email ? <a className="link-underline" href={`mailto:${conference.contact.email}`}>{conference.contact.email}</a> : "TBA"}</li>
               <li>Phone — {conference.contact.phone ? <a className="link-underline" href={`tel:${conference.contact.phone.replace(/\s/g, "")}`}>{conference.contact.phone}</a> : "TBA"}</li>
             </ul>
-            <Button asChild variant="bare" className="btn-gold mt-8"><Link to="/register">Register Now</Link></Button>
+            <Button asChild variant="bare" className="btn-gold mt-8"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
           </div>
         </div>
         <div className="flex flex-col justify-between gap-2 py-8 text-xs text-ivory/40 sm:flex-row">
