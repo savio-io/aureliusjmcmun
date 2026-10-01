@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const dayImages = [dayWestern, dayTraditional];
+const dayImages = [dayTraditional, dayWestern];
 
 function Index() {
   useRevealAll();
@@ -211,7 +211,7 @@ function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const on = () => {
-      if (ref.current) ref.current.style.translate = `0 ${window.scrollY * 0.15}px`;
+      if (ref.current) ref.current.style.transform = `translateY(${window.scrollY * 0.18}px) rotate(${window.scrollY * 0.01}deg)`;
     };
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
@@ -222,12 +222,28 @@ function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklch,var(--gold)_14%,transparent),transparent_60%)]" />
 
       <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-20 md:pt-32">
-        <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-12">
-          <div className="order-2 lg:order-1">
+        <div className="relative">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 w-[85vw] max-w-[620px] -translate-x-1/2 -translate-y-1/2 sm:w-[60vw]"
+          >
+            <div ref={ref}>
+              <div className="animate-float">
+                <img
+                  src={logo.url}
+                  alt=""
+                  width={688}
+                  height={881}
+                  className="block h-auto w-full opacity-[0.22] mix-blend-screen [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_72%)]"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="relative">
         <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
           <span className="h-px w-10 bg-gold" /> Model United Nations
         </div>
-        <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[9.5rem] xl:text-[11rem]">
+        <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[13.5rem]">
           <span className="block overflow-hidden"><span className="animate-rise block">Aurelius</span></span>
           <span className="block overflow-hidden">
             <span className="animate-rise block italic text-gold" style={{ animationDelay: "0.15s" }}>
@@ -235,20 +251,9 @@ function Hero() {
             </span>
           </span>
         </h1>
+        <span className="sr-only">Aurelius MUN official logo</span>
 
         <Countdown />
-          </div>
-          <div ref={ref} className="order-1 mx-auto w-full max-w-[220px] sm:max-w-[300px] lg:order-2 lg:max-w-[440px] lg:self-center">
-            <div className="animate-float relative">
-              <div className="absolute -inset-4 border border-gold/25" />
-              <img
-                src={logo.url}
-                alt="Aurelius MUN official logo"
-                width={896}
-                height={811}
-                className="relative block h-auto w-full shadow-2xl"
-              />
-            </div>
           </div>
         </div>
 
