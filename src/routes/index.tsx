@@ -212,7 +212,7 @@ function Hero() {
   }, []);
 
   return (
-    <section id="home" className="surface-dark relative flex min-h-[100svh] flex-col overflow-hidden">
+    <section id="home" className="surface-dark relative flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
       <div className="absolute inset-0">
         <img
           ref={ref}
@@ -225,8 +225,8 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/60" />
       </div>
 
-      <Container className="relative flex flex-1 flex-col justify-end pb-16 pt-28 md:pb-20">
-        <div className="eyebrow mb-8 flex items-center gap-4 text-gold">
+      <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-20 md:pb-20 md:pt-32">
+        <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
           <span className="h-px w-10 bg-gold" /> Model United Nations
         </div>
         <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[13.5rem]">
@@ -240,7 +240,7 @@ function Hero() {
 
         <Countdown />
 
-        <div className="mt-8 grid gap-6 border-t border-line-dark pt-6 md:grid-cols-[1fr_1fr_auto] md:items-end">
+        <div className="mt-5 grid gap-4 border-t border-line-dark pt-6 md:mt-8 md:grid-cols-[1fr_1fr_auto] md:items-end md:gap-6">
           <div>
             <p className="eyebrow text-ivory/50">Dates</p>
             <p className="mt-2 text-lg tracking-wide">{conference.datesShort}</p>
