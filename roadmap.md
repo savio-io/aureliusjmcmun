@@ -1,0 +1,4 @@
+- [x] Add a live countdown to the opening date in the home hero.
+- [x] Add a first-edition Secretariat message and retain replaceable portraits.
+- [x] Route registration calls to a dedicated page, with fees only in registration areas and no invented form URL.
+- [x] Remove the fee-category statistic and verify mobile and desktop presentation.

@@ -17,7 +17,7 @@ export const conference = {
     mapEmbedUrl: null as string | null,
   },
   /** Replace with the real registration form URL when available. */
-  registrationUrl: "#register-link-coming-soon",
+  registrationUrl: null as string | null,
   contact: {
     email: null as string | null,
     instagram: null as string | null, // e.g. "https://instagram.com/handle"
@@ -122,10 +122,6 @@ export const faqs = [
   {
     q: "Where is the conference being held?",
     a: "Jesus and Mary Convent School, Delta-3, O Block, Greater Noida, Uttar Pradesh.",
-  },
-  {
-    q: "What are the registration fees?",
-    a: "Internal delegates (Jesus and Mary Convent School): ₹1,500. External delegates: ₹2,000.",
   },
   {
     q: "What committees are available?",
