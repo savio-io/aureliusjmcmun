@@ -11,7 +11,7 @@ export const conference = {
   datesShort: "11 — 12 November 2026",
   venue: {
     name: "Jesus and Mary Convent School",
-    lines: ["Delta-3, O Block", "Greater Noida, Uttar Pradesh"],
+    lines: ["'O' Block, Delta - III ", "Greater Noida, Uttar Pradesh"],
     city: "Greater Noida",
     /** Paste a Google Maps embed URL here to show the live map. */
     mapEmbedUrl: null as string | null,
