@@ -224,24 +224,25 @@ function Hero() {
     <section id="home" className="surface-dark relative isolate flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklch,var(--gold)_14%,transparent),transparent_60%)]" />
 
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
+      >
+        <div ref={ref} className="h-[62%] max-h-[62%]">
+          <div className="hero-logo-motion flex h-full items-center justify-center">
+            <img
+              src={logo}
+              alt=""
+              width={768}
+              height={986}
+              className="hero-background-logo block h-full w-auto max-w-none"
+            />
+          </div>
+        </div>
+      </div>
+
       <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-20 md:pt-32">
         <div className="relative">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[80vw] max-w-[480px] -translate-x-1/2 -translate-y-1/2 sm:w-[42vw]"
-          >
-            <div ref={ref}>
-              <div className="hero-logo-motion">
-                <img
-                  src={logo}
-                  alt=""
-                  width={768}
-                  height={986}
-                  className="hero-background-logo block h-auto w-full"
-                />
-              </div>
-            </div>
-          </div>
           <div className="relative z-10">
         <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
           <span className="h-px w-10 bg-gold" /> Model United Nations
