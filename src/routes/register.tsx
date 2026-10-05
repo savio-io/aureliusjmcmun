@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { conference, fees } from "@/data/conference";
+import { conference, fees, schoolDelegation, feeNotes } from "@/data/conference";
 import heroGlobe from "@/assets/hero-globe.jpg";
 
 export const Route = createFileRoute("/register")({
@@ -67,6 +67,21 @@ function RegistrationPage() {
                 <p className="display shrink-0 text-3xl text-gold sm:text-5xl">{fee.price}</p>
               </div>
             ))}
+            <div className="border-t border-border py-7">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
+                <div className="min-w-0">
+                  <h3 className="display text-3xl sm:text-4xl">{schoolDelegation.label}</h3>
+                  <p className="eyebrow mt-2 text-gold">{schoolDelegation.priceNote}</p>
+                </div>
+                <p className="display shrink-0 text-3xl text-gold sm:text-5xl">{schoolDelegation.price}</p>
+              </div>
+              <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+                {schoolDelegation.points.map((pt) => <li key={pt}>— {pt}</li>)}
+              </ul>
+            </div>
+            <div className="space-y-1 border-t border-border pt-5 text-xs text-muted-foreground">
+              {feeNotes.map((n) => <p key={n}>{n}</p>)}
+            </div>
           </div>
         </div>
       </section>

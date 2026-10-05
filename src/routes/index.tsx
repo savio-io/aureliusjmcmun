@@ -9,6 +9,8 @@ import dayTraditional from "@/assets/day-traditional.jpg";
 import {
   conference,
   fees,
+  schoolDelegation,
+  feeNotes,
   committees,
   days,
   secretariat,
@@ -499,6 +501,22 @@ function Register() {
             </div>
           ))}
         </div>
+        <div className="reveal mx-auto max-w-5xl border border-t-0 border-line-dark p-8 transition-colors duration-700 hover:bg-ink-soft md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 md:p-12">
+          <div>
+            <p className="eyebrow text-ivory/60">{schoolDelegation.label}</p>
+            <p className="display mt-8 text-6xl text-gold md:text-7xl">{schoolDelegation.price}</p>
+            <p className="eyebrow mt-6 text-gold">{schoolDelegation.priceNote}</p>
+          </div>
+          <ul className="mt-8 space-y-4 md:mt-0">
+            {schoolDelegation.points.map((pt) => (
+              <li key={pt} className="flex gap-3 text-ivory/70"><span className="text-gold" aria-hidden>—</span><span>{pt}</span></li>
+            ))}
+            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
+          </ul>
+        </div>
+        <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
+          {feeNotes.map((n) => <p key={n}>{n}</p>)}
+        </div>
       </Container>
     </section>
   );
@@ -525,7 +543,7 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <div className="grid gap-10 sm:grid-cols-2 lg:max-w-4xl">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {secretariat.map((p, i) => (
             <figure key={p.name} className="reveal group" style={{ transitionDelay: `${i * 120}ms` }}>
               <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">

@@ -43,6 +43,27 @@ export const fees = [
   },
 ];
 
+export const schoolDelegation = {
+  label: "School Delegation",
+  price: "+ ₹500",
+  priceNote: "Once per school · not per delegate",
+  points: [
+    "Applies when 8 or more delegates from the same school register.",
+    "The regular delegate fee still applies to each delegate.",
+    "An additional ₹500 is paid once by the school, regardless of whether there are 8, 9, 10 or more delegates.",
+    "School Delegations are eligible for the Best School Delegation award.",
+  ],
+};
+
+export const feeNotes = ["Fees are non-negotiable.", "No refunds will be provided once registration is confirmed."];
+
+export const schoolAward = {
+  title: "Best School Delegation",
+  description:
+    "Awarded to the school delegation demonstrating the strongest overall performance, participation, diplomacy, and representation across the conference.",
+  prize: "Best School Delegation Trophy + Certificate of Recognition",
+};
+
 export type Committee = {
   index: string;
   short: string;
@@ -89,8 +110,11 @@ export const days = [
 export type Person = { name: string; role: string | null; photo: string | null };
 
 export const secretariat: Person[] = [
-  { name: "Savio Jose", role: null, photo: null },
-  { name: "Aditya Kumar Singh", role: null, photo: null },
+  { name: "Savio Jose", role: "Founder & Director General", photo: null },
+  { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: null },
+  { name: "Aradhya Shakya", role: "Deputy Director General", photo: null },
+  { name: "Somya Yadav", role: "Director General of Academics", photo: null },
+  { name: "Dishika Yadav", role: "Director General of Operations", photo: null },
 ];
 
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
