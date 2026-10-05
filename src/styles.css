@@ -151,12 +151,12 @@
 @utility animate-float { animation: float 9s ease-in-out infinite; }
 
 .hero-background-logo { 
-  width: 150%;
-  height: 150%;
+  width: 140%;
+  height: 140%;
   max-width: none;
   object-fit: contain;
 
-  opacity: 0.22; 
+  opacity: 0.21; 
   mix-blend-mode: screen; 
   mask-image: radial-gradient(ellipse at center, black 26%, transparent 70%); 
 }
