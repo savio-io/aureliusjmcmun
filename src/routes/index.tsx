@@ -228,7 +228,7 @@ function Hero() {
         <div className="relative">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[150vw] max-w-[1400px] -translate-x-1/2 -translate-y-1/2 sm:w-[110vw]"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[80vw] max-w-[480px] -translate-x-1/2 -translate-y-1/2 sm:w-[42vw]"
           >
             <div ref={ref}>
               <div className="hero-logo-motion">
