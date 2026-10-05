@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep conference facts and the replaceable registration destination in the shared conference data module, so the homepage and registration page remain consistent.
+- Import the hero logo from a repository-local image asset so exported GitHub and Vercel deployments do not depend on Lovable asset serving.

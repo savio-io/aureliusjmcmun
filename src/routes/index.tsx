@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
-import logo from "@/assets/aurelius-logo-motto.jpg.asset.json";
+import logo from "@/assets/aurelius-hero-logo.jpg";
 import { Awards } from "@/components/Awards";
 import dayWestern from "@/assets/day-western.jpg";
 import dayTraditional from "@/assets/day-traditional.jpg";
@@ -212,36 +212,37 @@ function Countdown() {
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const on = () => {
-      if (ref.current) ref.current.style.transform = `translateY(${window.scrollY * 0.18}px) rotate(${window.scrollY * 0.01}deg)`;
+      if (ref.current) ref.current.style.transform = `translateY(${Math.min(window.scrollY, window.innerHeight) * 0.06}px)`;
     };
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
 
   return (
-    <section id="home" className="surface-dark relative flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
+    <section id="home" className="surface-dark relative isolate flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklch,var(--gold)_14%,transparent),transparent_60%)]" />
 
       <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-20 md:pt-32">
         <div className="relative">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 w-[85vw] max-w-[620px] -translate-x-1/2 -translate-y-1/2 sm:w-[60vw]"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[150vw] max-w-[1400px] -translate-x-1/2 -translate-y-1/2 sm:w-[110vw]"
           >
             <div ref={ref}>
-              <div className="animate-float">
+              <div className="hero-logo-motion">
                 <img
-                  src={logo.url}
+                  src={logo}
                   alt=""
-                  width={688}
-                  height={881}
-                  className="block h-auto w-full opacity-[0.22] mix-blend-screen [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_72%)]"
+                  width={768}
+                  height={986}
+                  className="hero-background-logo block h-auto w-full"
                 />
               </div>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative z-10">
         <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
           <span className="h-px w-10 bg-gold" /> Model United Nations
         </div>

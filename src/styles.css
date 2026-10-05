@@ -150,7 +150,20 @@
 @keyframes float { 0%,100% { transform: translateY(0) rotate(-0.6deg); } 50% { transform: translateY(-10px) rotate(0.6deg); } }
 @utility animate-float { animation: float 9s ease-in-out infinite; }
 
+.hero-background-logo {
+  opacity: 0.24;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at center, black 26%, transparent 70%);
+}
+
+@keyframes hero-logo-drift {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.025); }
+}
+
+.hero-logo-motion { animation: hero-logo-drift 32s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
-  .animate-drift, .animate-slow-spin, .animate-line, .animate-rise, .animate-float { animation: none; }
+  .animate-drift, .animate-slow-spin, .animate-line, .animate-rise, .animate-float, .hero-logo-motion { animation: none; }
 }
