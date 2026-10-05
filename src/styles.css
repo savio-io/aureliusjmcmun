@@ -150,14 +150,15 @@
 @keyframes float { 0%,100% { transform: translateY(0) rotate(-0.6deg); } 50% { transform: translateY(-10px) rotate(0.6deg); } }
 @utility animate-float { animation: float 9s ease-in-out infinite; }
 
-.hero-background-logo {
-  width: min(80%, 700px);
-  height: 80%;
+.hero-background-logo { 
+  width: 125%;
+  height: 125%;
+  max-width: none;
   object-fit: contain;
 
-  opacity: 0.24;
-  mix-blend-mode: screen;
-  mask-image: radial-gradient(ellipse at center, black 26%, transparent 70%);
+  opacity: 0.24; 
+  mix-blend-mode: screen; 
+  mask-image: radial-gradient(ellipse at center, black 26%, transparent 70%); 
 }
 
 @keyframes hero-logo-drift {
