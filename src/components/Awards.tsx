@@ -1,4 +1,4 @@
-import { awards } from "@/data/conference";
+import { awards, schoolAward } from "@/data/conference";
 
 export function Awards() {
   return (
@@ -28,6 +28,14 @@ export function Awards() {
             </li>
           ))}
         </ol>
+        <div className="reveal mt-16 border border-gold/40 p-8 md:grid md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-end md:gap-12 md:p-12">
+          <div>
+            <span className="eyebrow text-gold">School Recognition</span>
+            <h3 className="display mt-5 text-5xl md:text-6xl">{schoolAward.title}</h3>
+            <p className="mt-5 max-w-xl text-ivory/70">{schoolAward.description}</p>
+          </div>
+          <p className="eyebrow mt-8 text-ivory/80 md:mt-0 md:text-right">{schoolAward.prize}</p>
+        </div>
       </div>
     </section>
   );

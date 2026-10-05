@@ -9,6 +9,8 @@ import dayTraditional from "@/assets/day-traditional.jpg";
 import {
   conference,
   fees,
+  schoolDelegation,
+  feeNotes,
   committees,
   days,
   secretariat,
@@ -22,7 +24,7 @@ import { useRevealAll } from "@/hooks/use-reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aurelius MUN 2026 — 11–12 November, Greater Noida" },
+      { title: "Aurelius MUN 2026 — 18–19 November, Greater Noida" },
       {
         name: "description",
         content:
@@ -31,7 +33,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Aurelius MUN 2026" },
       {
         property: "og:description",
-        content: "Two days of debate and diplomacy. 11–12 November 2026, Greater Noida.",
+        content: "Two days of debate and diplomacy. 18–19 November 2026, Greater Noida.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -171,7 +173,7 @@ function Nav() {
 
 /* ---------------- hero ---------------- */
 
-const OPENING_TIME = new Date("2026-11-11T00:00:00+05:30").getTime();
+const OPENING_TIME = new Date("2026-11-18T00:00:00+05:30").getTime();
 
 function Countdown() {
   const [remaining, setRemaining] = useState<number | null>(null);
@@ -190,7 +192,7 @@ function Countdown() {
     { label: "Seconds", value: totalSeconds % 60 },
   ];
   return (
-    <div className="mt-8 md:mt-10" aria-label="Time until 11 November 2026">
+    <div className="mt-8 md:mt-10" aria-label="Time until 18 November 2026">
       <p className="eyebrow mb-4 text-gold">Until the first edition</p>
       <div className="flex items-start gap-2 sm:gap-5">
         {values.map((item, i) => (
@@ -303,7 +305,7 @@ function About() {
           <div className="reveal mt-12 grid gap-8 text-base leading-relaxed text-muted-foreground md:grid-cols-2">
             <p>
               Aurelius MUN 2026 is a Model United Nations conference hosted at Jesus and Mary Convent School,
-              Greater Noida, on 11 and 12 November 2026.
+              Greater Noida, on 18 and 19 November 2026.
             </p>
             <p>
               Across three committees, delegates will represent nations and leaders, negotiate positions,
@@ -349,7 +351,7 @@ function Details() {
   return (
     <section id="conference" className="surface-dark py-24 md:py-36">
       <Container>
-        <SectionHead index="II" label="The Conference" title={<>11 — 12<br /><em className="text-gold">November</em> 2026</>} dark />
+        <SectionHead index="II" label="The Conference" title={<>18 — 19<br /><em className="text-gold">November</em> 2026</>} dark />
         <div className="grid gap-12 border-t border-line-dark pt-12 lg:grid-cols-12">
           <div className="reveal lg:col-span-5">
             <p className="eyebrow text-ivory/50">Venue</p>
@@ -499,6 +501,22 @@ function Register() {
             </div>
           ))}
         </div>
+        <div className="reveal mx-auto max-w-5xl border border-t-0 border-line-dark p-8 transition-colors duration-700 hover:bg-ink-soft md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 md:p-12">
+          <div>
+            <p className="eyebrow text-ivory/60">{schoolDelegation.label}</p>
+            <p className="display mt-8 text-6xl text-gold md:text-7xl">{schoolDelegation.price}</p>
+            <p className="eyebrow mt-6 text-gold">{schoolDelegation.priceNote}</p>
+          </div>
+          <ul className="mt-8 space-y-4 md:mt-0">
+            {schoolDelegation.points.map((pt) => (
+              <li key={pt} className="flex gap-3 text-ivory/70"><span className="text-gold" aria-hidden>—</span><span>{pt}</span></li>
+            ))}
+            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
+          </ul>
+        </div>
+        <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
+          {feeNotes.map((n) => <p key={n}>{n}</p>)}
+        </div>
       </Container>
     </section>
   );
@@ -525,7 +543,7 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <div className="grid gap-10 sm:grid-cols-2 lg:max-w-4xl">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {secretariat.map((p, i) => (
             <figure key={p.name} className="reveal group" style={{ transitionDelay: `${i * 120}ms` }}>
               <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">
