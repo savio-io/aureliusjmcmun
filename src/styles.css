@@ -157,11 +157,12 @@
 }
 
 @keyframes hero-logo-drift {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.025); }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate3d(1.4%, -12px, 0) scale(1.035) rotate(0.35deg); }
+  66% { transform: translate3d(-1.4%, -5px, 0) scale(1.018) rotate(-0.35deg); }
 }
 
-.hero-logo-motion { animation: hero-logo-drift 32s ease-in-out infinite; }
+.hero-logo-motion { animation: hero-logo-drift 38s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
