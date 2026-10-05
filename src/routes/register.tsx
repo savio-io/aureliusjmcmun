@@ -8,7 +8,7 @@ export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
       { title: "Registration — Aurelius MUN 2026" },
-      { name: "description", content: "Registration information and delegate fees for Aurelius MUN 2026, 11–12 November in Greater Noida." },
+      { name: "description", content: "Registration information and delegate fees for Aurelius MUN 2026, 18–19 November in Greater Noida." },
       { property: "og:title", content: "Registration — Aurelius MUN 2026" },
       { property: "og:description", content: "Delegate registration information for Aurelius MUN 2026 in Greater Noida." },
       { property: "og:type", content: "website" },
@@ -30,7 +30,7 @@ function RegistrationPage() {
             <Link to="/" className="eyebrow inline-flex items-center gap-2 text-ivory/70 transition-colors hover:text-gold"><ArrowLeft size={14} /> <span className="hidden sm:inline">Back to conference</span><span className="sm:hidden">Back</span></Link>
           </header>
           <div className="pb-16 pt-20 sm:pb-24 sm:pt-28">
-            <p className="eyebrow text-gold">Aurelius MUN · 11—12 November 2026</p>
+            <p className="eyebrow text-gold">Aurelius MUN · 18—19 November 2026</p>
             <h1 className="display mt-7 max-w-4xl text-6xl sm:text-8xl lg:text-9xl">Join the <em className="text-gold">conversation.</em></h1>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-ivory/70 sm:text-lg">Registration for the first edition of Aurelius MUN. We look forward to welcoming you to two days of debate, diplomacy and collaboration.</p>
           </div>

@@ -22,7 +22,7 @@ import { useRevealAll } from "@/hooks/use-reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aurelius MUN 2026 — 11–12 November, Greater Noida" },
+      { title: "Aurelius MUN 2026 — 18–19 November, Greater Noida" },
       {
         name: "description",
         content:
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Aurelius MUN 2026" },
       {
         property: "og:description",
-        content: "Two days of debate and diplomacy. 11–12 November 2026, Greater Noida.",
+        content: "Two days of debate and diplomacy. 18–19 November 2026, Greater Noida.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -171,7 +171,7 @@ function Nav() {
 
 /* ---------------- hero ---------------- */
 
-const OPENING_TIME = new Date("2026-11-11T00:00:00+05:30").getTime();
+const OPENING_TIME = new Date("2026-11-18T00:00:00+05:30").getTime();
 
 function Countdown() {
   const [remaining, setRemaining] = useState<number | null>(null);
@@ -190,7 +190,7 @@ function Countdown() {
     { label: "Seconds", value: totalSeconds % 60 },
   ];
   return (
-    <div className="mt-8 md:mt-10" aria-label="Time until 11 November 2026">
+    <div className="mt-8 md:mt-10" aria-label="Time until 18 November 2026">
       <p className="eyebrow mb-4 text-gold">Until the first edition</p>
       <div className="flex items-start gap-2 sm:gap-5">
         {values.map((item, i) => (
@@ -303,7 +303,7 @@ function About() {
           <div className="reveal mt-12 grid gap-8 text-base leading-relaxed text-muted-foreground md:grid-cols-2">
             <p>
               Aurelius MUN 2026 is a Model United Nations conference hosted at Jesus and Mary Convent School,
-              Greater Noida, on 11 and 12 November 2026.
+              Greater Noida, on 18 and 19 November 2026.
             </p>
             <p>
               Across three committees, delegates will represent nations and leaders, negotiate positions,
@@ -349,7 +349,7 @@ function Details() {
   return (
     <section id="conference" className="surface-dark py-24 md:py-36">
       <Container>
-        <SectionHead index="II" label="The Conference" title={<>11 — 12<br /><em className="text-gold">November</em> 2026</>} dark />
+        <SectionHead index="II" label="The Conference" title={<>18 — 19<br /><em className="text-gold">November</em> 2026</>} dark />
         <div className="grid gap-12 border-t border-line-dark pt-12 lg:grid-cols-12">
           <div className="reveal lg:col-span-5">
             <p className="eyebrow text-ivory/50">Venue</p>

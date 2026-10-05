@@ -7,8 +7,8 @@
 export const conference = {
   name: "Aurelius MUN",
   year: "2026",
-  dates: "11–12 November 2026",
-  datesShort: "11 — 12 November 2026",
+  dates: "18–19 November 2026",
+  datesShort: "18 — 19 November 2026",
   venue: {
     name: "Jesus and Mary Convent School",
     lines: ["'O' Block, Delta - III ", "Greater Noida, Uttar Pradesh"],
@@ -30,16 +30,16 @@ export const fees = [
   {
     id: "internal",
     label: "Internal Delegates",
-    price: "₹1,500",
+    price: "₹1,600",
     note: "For delegates from Jesus and Mary Convent School.",
-    earlyBird: "Early Bird Fee · Valid until 17 October 2026",
+    earlyBird: "Early Bird Fee · Valid until 30 October 2026",
   },
   {
     id: "external",
     label: "External Delegates",
     price: "₹2,000",
     note: "For delegates from other schools and institutions.",
-    earlyBird: "Early Bird Fee · Valid until 17 October 2026",
+    earlyBird: "Early Bird Fee · Valid until 30 October 2026",
   },
 ];
 
@@ -82,8 +82,8 @@ export const committees: Committee[] = [
 ];
 
 export const days = [
-  { index: "01", date: "11 November", dress: "Traditional Indian" },
-  { index: "02", date: "12 November", dress: "Formal Western" },
+  { index: "01", date: "18 November", dress: "Traditional Indian" },
+  { index: "02", date: "19 November", dress: "Formal Western" },
 ];
 
 export type Person = { name: string; role: string | null; photo: string | null };
@@ -99,12 +99,12 @@ export const executiveBoard: { committee: string; name: string; role: string; ph
 /** Add a `time` to any item once timings are announced. */
 export const schedule: { day: string; items: { time: string | null; title: string }[] }[] = [
   {
-    day: "Day 01 · 11 November",
+    day: "Day 01 · 18 November",
     items: ["Opening Ceremony", "Session 1", "Lunch", "Session 2", "High Tea"].map((title) => ({ time: null, title })),
   },
   {
-    day: "Day 02 · 12 November",
-    items: ["Session 1", "Lunch", "Session 2", "Closing & Award Ceremony", "High Tea"].map((title) => ({ time: null, title })),
+    day: "Day 02 · 19 November",
+    items: ["Session 3", "Lunch", "Session 4", "Closing & Award Ceremony", "High Tea"].map((title) => ({ time: null, title })),
   },
 ];
 
@@ -113,7 +113,7 @@ export const faqs = [
     q: "What is Aurelius MUN?",
     a: "Aurelius MUN 2026 is a two-day Model United Nations conference bringing delegates together for structured debate, diplomacy and discussion.",
   },
-  { q: "When is Aurelius MUN?", a: "11–12 November 2026." },
+  { q: "When is Aurelius MUN?", a: "18–19 November 2026." },
   {
     q: "Where is the conference being held?",
     a: "Jesus and Mary Convent School, Delta-3, O Block, Greater Noida, Uttar Pradesh.",
