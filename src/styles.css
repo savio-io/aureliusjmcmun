@@ -156,7 +156,7 @@
   max-width: none;
   object-fit: contain;
 
-  opacity: 0.24; 
+  opacity: 0.22; 
   mix-blend-mode: screen; 
   mask-image: radial-gradient(ellipse at center, black 26%, transparent 70%); 
 }
