@@ -27,7 +27,7 @@ function SchoolDelegationPage() {
           <Link to="/" className="display text-2xl text-ivory transition-colors hover:text-gold">AURELIUS <span className="text-gold">MUN</span></Link>
           <Link to="/" className="eyebrow inline-flex items-center gap-2 text-ivory/70 transition-colors hover:text-gold"><ArrowLeft size={14} /> Back</Link>
         </header>
-        <div className="flex flex-1 flex-col justify-center py-20 animate-fade-up">
+        <div className="flex flex-1 flex-col justify-center py-20">
           <p className="eyebrow text-gold">School Delegation · Aurelius MUN 2026</p>
           <h1 className="display mt-7 max-w-4xl text-6xl sm:text-8xl lg:text-9xl">Coming <em className="text-gold">soon.</em></h1>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-ivory/70 sm:text-lg">School Delegation registration is coming soon. Please check back shortly.</p>
