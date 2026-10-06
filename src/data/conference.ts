@@ -1,3 +1,6 @@
+import dishikaPhoto from "@/assets/dishika-yadav.jpg.asset.json";
+import somyaPhoto from "@/assets/somya-yadav.jpg.asset.json";
+
 /**
  * AURELIUS MUN 2026 — editable conference content.
  * Update agendas, EB, links, contacts, schedule and photos here.
@@ -118,8 +121,8 @@ export const secretariat: Person[] = [
   { name: "Savio Jose", role: "Founder & Director General", photo: null },
   { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: null },
   { name: "Aradhya Shakya", role: "Deputy Director General", photo: null },
-  { name: "Somya Yadav", role: "Director General of Academics", photo: null },
-  { name: "Dishika Yadav", role: "Director General of Operations", photo: null },
+  { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto.url },
+  { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto.url },
 ];
 
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
