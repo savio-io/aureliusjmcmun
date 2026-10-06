@@ -499,7 +499,7 @@ function Register() {
               <p className="display mt-8 text-7xl text-gold md:text-8xl">{f.price}</p>
               <p className="eyebrow mt-6 text-gold">{f.earlyBird}</p>
               <p className="mt-4 min-h-12 text-ivory/70">{f.note}</p>
-              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button>
+              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><a href={(f.id === "external" ? conference.externalRegistrationUrl : REG_URL) ?? REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button>
             </div>
           ))}
         </div>
@@ -682,6 +682,7 @@ function Contact() {
     { label: "Official email", value: c.email, href: c.email ? `mailto:${c.email}` : null, external: false },
     { label: "Instagram", value: c.instagram ? "@aureliusjmcmun" : null, href: c.instagram, external: true },
     { label: "Phone", value: c.phone, href: c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : null, external: false },
+    { label: "Teacher In-Charge · Additional", value: c.teacherPhone, href: c.teacherPhone ? `tel:${c.teacherPhone.replace(/\s/g, "")}` : null, external: false },
     { label: "Location", value: "Open in Google Maps", href: conference.venue.mapsUrl, external: true },
   ];
   return (
@@ -758,6 +759,7 @@ function Footer() {
               <li>Instagram — {conference.contact.instagram ? <a className="link-underline" href={conference.contact.instagram} target="_blank" rel="noopener noreferrer">Follow</a> : "TBA"}</li>
               <li>Email — {conference.contact.email ? <a className="link-underline" href={`mailto:${conference.contact.email}`}>{conference.contact.email}</a> : "TBA"}</li>
               <li>Phone — {conference.contact.phone ? <a className="link-underline" href={`tel:${conference.contact.phone.replace(/\s/g, "")}`}>{conference.contact.phone}</a> : "TBA"}</li>
+              <li>Teacher In-Charge · Additional — {conference.contact.teacherPhone ? <a className="link-underline" href={`tel:${conference.contact.teacherPhone.replace(/\s/g, "")}`}>{conference.contact.teacherPhone}</a> : "TBA"}</li>
             </ul>
             <Button asChild variant="bare" className="btn-gold mt-8"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
           </div>

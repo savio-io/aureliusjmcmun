@@ -19,11 +19,15 @@ export const conference = {
   },
   /** Replace with the real registration form URL when available. */
   registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfAXWncjt242QcjeLV8uM3nzcVOlVTRBlRtHkkWCDu1hXyHqA/viewform?usp=sharing&ouid=112415953088803668529" as string | null,
+  /** External delegation registration form — must differ from the internal one. */
+  externalRegistrationUrl: "https://forms.gle/yiEn6Zb6C7E8i5rVA" as string | null,
   delegateMatrixUrl: "https://docs.google.com/spreadsheets/d/1P31OodkUGvIXAeLv4JcECTeyZLyuD8zvDkso1D9GmWI/edit?usp=sharing",
   contact: {
     email: "aureliusjmcmun@gmail.com" as string | null,
     instagram: "https://www.instagram.com/aureliusjmcmun/" as string | null,
     phone: "+91 93184 69083" as string | null,
+    /** Additional Teacher In-Charge contact. */
+    teacherPhone: "+91 70115 43292" as string | null,
   },
 };
 
