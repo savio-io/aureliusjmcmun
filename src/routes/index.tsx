@@ -132,7 +132,7 @@ function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
+          <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><a href="#register">Register Now</a></Button>
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen(!open)}
@@ -164,7 +164,7 @@ function Nav() {
               </li>
             ))}
           </ul>
-          <Button asChild variant="bare" className="btn-gold w-full"><a href={REG_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Register Now</a></Button>
+          <Button asChild variant="bare" className="btn-gold w-full"><a href="#register" onClick={() => setOpen(false)}>Register Now</a></Button>
         </Container>
       </div>
     </header>
@@ -273,7 +273,7 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="bare" className="btn-gold"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
+            <Button asChild variant="bare" className="btn-gold"><a href="#register">Register Now</a></Button>
             <a href="#about" className="btn-ghost">Explore the Conference</a>
           </div>
         </div>
@@ -513,11 +513,12 @@ function Register() {
             {schoolDelegation.points.map((pt) => (
               <li key={pt} className="flex gap-3 text-ivory/70"><span className="text-gold" aria-hidden>—</span><span>{pt}</span></li>
             ))}
-            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
+            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><Link to="/school-delegation">Register Now <span aria-hidden>→</span></Link></Button></li>
           </ul>
         </div>
         <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
           {feeNotes.map((n) => <p key={n}>{n}</p>)}
+          <p className="pt-3"><a href={conference.delegateMatrixUrl} target="_blank" rel="noopener noreferrer" className="eyebrow inline-flex items-center gap-2 border-b border-gold/60 pb-1 text-gold transition-colors hover:text-ivory">View Delegate Matrix <span aria-hidden>↗</span></a></p>
         </div>
       </Container>
     </section>

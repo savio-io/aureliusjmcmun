@@ -18,7 +18,8 @@ export const conference = {
     mapsUrl: "https://maps.app.goo.gl/NxR55zPxVSsmceJX9",
   },
   /** Replace with the real registration form URL when available. */
-  registrationUrl: "https://forms.gle/aizeE5PG7Tdd2DM87" as string | null,
+  registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfAXWncjt242QcjeLV8uM3nzcVOlVTRBlRtHkkWCDu1hXyHqA/viewform?usp=sharing&ouid=112415953088803668529" as string | null,
+  delegateMatrixUrl: "https://docs.google.com/spreadsheets/d/1P31OodkUGvIXAeLv4JcECTeyZLyuD8zvDkso1D9GmWI/edit?usp=sharing",
   contact: {
     email: "aureliusjmcmun@gmail.com" as string | null,
     instagram: "https://www.instagram.com/aureliusjmcmun/" as string | null,
@@ -98,7 +99,7 @@ export const committees: Committee[] = [
     description:
       "A simulation of Indian national politics, where delegates represent political leaders and debate issues of national importance.",
     agenda:
-      "Deliberating on Contemporary Indian Political Challenges with Special Emphasis on Electoral Reforms and Political Funding",
+      "Deliberation on India’s Response to Cross-Border Terrorism and Regional Security",
   },
 ];
 
@@ -147,7 +148,7 @@ export const faqs = [
     a: "United Nations General Assembly (UNGA), World Health Organization (WHO) and All India Political Parties Meet (AIPPM).",
   },
   { q: "What is the dress code?", a: "Day 1: Traditional Indian. Day 2: Formal Western." },
-  { q: "What are the agendas?", a: "UNGA: Addressing the Global Refugee Crisis with Special Emphasis on Equitable Responsibility-Sharing and Refugee Integration. WHO: Strengthening Global Health Security and Pandemic Response with Special Emphasis on Vaccine Equity and Early Outbreak Detection. AIPPM: Deliberating on Contemporary Indian Political Challenges with Special Emphasis on Electoral Reforms and Political Funding." },
+  { q: "What are the agendas?", a: "UNGA: Addressing the Global Refugee Crisis with Special Emphasis on Equitable Responsibility-Sharing and Refugee Integration. WHO: Strengthening Global Health Security and Pandemic Response with Special Emphasis on Vaccine Equity and Early Outbreak Detection. AIPPM: Deliberation on India’s Response to Cross-Border Terrorism and Regional Security." },
   { q: "When will the Executive Board be announced?", a: "To be announced." },
 ];
 
