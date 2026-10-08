@@ -111,11 +111,16 @@ function Nav() {
   }, []);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; document.documentElement.style.overflow = ""; };
   }, [open]);
 
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-50 text-ivory transition-all duration-500 ${
+        open ? "bg-ink lg:bg-transparent" : ""
+      } ${
         scrolled ? "border-b border-line-dark bg-ink/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
@@ -143,13 +148,14 @@ function Nav() {
           </button>
         </div>
       </Container>
+    </header>
 
       <div
-        className={`fixed inset-0 top-16 z-40 surface-dark transition-all duration-500 lg:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto overscroll-contain surface-dark transition-all duration-500 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
-        <Container className="flex h-full flex-col justify-between pb-10 pt-8">
+        <Container className="flex min-h-full flex-col justify-between gap-8 pb-10 pt-8">
           <ul className="space-y-1">
             {navLinks.map((l, i) => (
               <li key={l.href} className="border-b border-line-dark">
@@ -167,7 +173,7 @@ function Nav() {
           <Button asChild variant="bare" className="btn-gold w-full"><a href="#register" onClick={() => setOpen(false)}>Register Now</a></Button>
         </Container>
       </div>
-    </header>
+    </>
   );
 }
 
