@@ -513,7 +513,7 @@ function Register() {
             {schoolDelegation.points.map((pt) => (
               <li key={pt} className="flex gap-3 text-ivory/70"><span className="text-gold" aria-hidden>—</span><span>{pt}</span></li>
             ))}
-            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><Link to="/school-delegation">Register Now <span aria-hidden>→</span></Link></Button></li>
+            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
           </ul>
         </div>
         <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
