@@ -557,7 +557,7 @@ function Secretariat() {
             <figure key={p.name} className="reveal group" style={{ transitionDelay: `${i * 120}ms` }}>
               <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">
                 {p.photo ? (
-                  <img src={p.photo} alt={p.name} loading="lazy" className="h-full w-full object-cover grayscale transition duration-1000 group-hover:grayscale-0" />
+                  <img src={p.photo} alt={p.name} loading="lazy" className="h-full w-full object-cover" />
                 ) : (
                   <>
                     <div className="absolute inset-6 border border-line-dark transition-all duration-700 group-hover:inset-4 group-hover:border-gold/40" />
