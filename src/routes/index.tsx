@@ -121,7 +121,7 @@ function Nav() {
       className={`fixed inset-x-0 top-0 z-50 text-ivory transition-all duration-500 ${
         open ? "bg-ink lg:bg-transparent" : ""
       } ${
-        scrolled ? "border-b border-line-dark bg-ink/85 backdrop-blur-md" : "bg-transparent"
+        open ? "border-b border-line-dark" : scrolled ? "border-b border-line-dark bg-ink/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
       <Container className="flex h-16 items-center justify-between md:h-20">
