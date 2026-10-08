@@ -1,5 +1,7 @@
-import dishikaPhoto from "@/assets/dishika-yadav.jpg.asset.json";
-import somyaPhoto from "@/assets/somya-yadav.jpg.asset.json";
+import dishikaPhoto from "@/assets/dishika-yadav.jpg";
+import somyaPhoto from "@/assets/somya-yadav.jpg";
+import adityaPhoto from "@/assets/aditya-kumar-singh.jpg";
+import aradhyaPhoto from "@/assets/aradhya-shakya.jpg";
 
 /**
  * AURELIUS MUN 2026 — editable conference content.
@@ -21,9 +23,9 @@ export const conference = {
     mapsUrl: "https://maps.app.goo.gl/NxR55zPxVSsmceJX9",
   },
   /** Replace with the real registration form URL when available. */
-  registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfAXWncjt242QcjeLV8uM3nzcVOlVTRBlRtHkkWCDu1hXyHqA/viewform?usp=sharing&ouid=112415953088803668529" as string | null,
+  registrationUrl: "https://forms.gle/9fzqvfCjLzcbPB68A" as string | null,
   /** External delegation registration form — must differ from the internal one. */
-  externalRegistrationUrl: "https://forms.gle/yiEn6Zb6C7E8i5rVA" as string | null,
+  externalRegistrationUrl: "https://forms.gle/9fzqvfCjLzcbPB68A" as string | null,
   delegateMatrixUrl: "https://docs.google.com/spreadsheets/d/1P31OodkUGvIXAeLv4JcECTeyZLyuD8zvDkso1D9GmWI/edit?usp=sharing",
   contact: {
     email: "aureliusjmcmun@gmail.com" as string | null,
@@ -119,10 +121,10 @@ export type Person = { name: string; role: string | null; photo: string | null }
 
 export const secretariat: Person[] = [
   { name: "Savio Jose", role: "Founder & Director General", photo: null },
-  { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: null },
-  { name: "Aradhya Shakya", role: "Deputy Director General", photo: null },
-  { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto.url },
-  { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto.url },
+  { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: adityaPhoto },
+  { name: "Aradhya Shakya", role: "Deputy Director General", photo: aradhyaPhoto },
+  { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto },
+  { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto },
 ];
 
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
