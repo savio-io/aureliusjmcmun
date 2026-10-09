@@ -552,21 +552,21 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-10 lg:grid-cols-3">
           {secretariat.map((p, i) => (
-            <figure key={p.name} className="reveal group" style={{ transitionDelay: `${i * 120}ms` }}>
+            <figure key={p.name} className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
               <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">
                 {p.photo ? (
-                  <img src={p.photo} alt={p.name} loading="lazy" className="h-full w-full object-cover" />
+                  <img src={p.photo} alt={p.name} loading="lazy" className="h-full w-full object-cover grayscale" />
                 ) : (
                   <>
-                    <div className="absolute inset-6 border border-line-dark transition-all duration-700 group-hover:inset-4 group-hover:border-gold/40" />
+                    <div className="absolute inset-3 border border-line-dark transition-all duration-700 group-hover:border-gold/40 sm:inset-6 sm:group-hover:inset-4" />
                     <Initials name={p.name} />
                   </>
                 )}
               </div>
-              <figcaption className="mt-6 border-t border-border pt-5">
-                <p className="display text-3xl">{p.name}</p>
+              <figcaption className="mt-3 border-t border-border pt-3 sm:mt-6 sm:pt-5">
+                <p className="display text-xl sm:text-3xl">{p.name}</p>
                 <p className="eyebrow mt-2 text-muted-foreground">{p.role ?? "Photo coming soon"}</p>
               </figcaption>
             </figure>
