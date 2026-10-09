@@ -3,6 +3,7 @@ import { useEffect } from "react";
 /** Adds `is-visible` to every `.reveal` element as it enters the viewport. */
 export function useRevealAll() {
   useEffect(() => {
+    document.documentElement.classList.add("js-reveal");
     const els = document.querySelectorAll<HTMLElement>(".reveal");
     const io = new IntersectionObserver(
       (entries) => {
