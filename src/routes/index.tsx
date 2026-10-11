@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
@@ -47,7 +47,7 @@ const dayImages = [dayTraditional, dayWestern];
 function Index() {
   useRevealAll();
   return (
-    <div className="conference-site overflow-x-clip">
+    <div className="overflow-x-clip">
       <Nav />
       <Hero />
       <About />
@@ -83,19 +83,19 @@ function SectionHead({
   dark?: boolean;
 }) {
   return (
-    <div className="reveal mb-10 md:mb-14">
+    <div className="reveal mb-14 md:mb-20">
       <div className="flex items-center gap-4">
         <span className="eyebrow text-gold">{index}</span>
-        
+        <span className={`h-px w-12 ${dark ? "bg-line-dark" : "bg-border"}`} />
         <span className={`eyebrow ${dark ? "text-ivory/60" : "text-muted-foreground"}`}>{label}</span>
       </div>
-      <h2 className="display mt-5 text-4xl leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">{title}</h2>
+      <h2 className="display mt-6 text-5xl sm:text-6xl md:text-7xl lg:text-8xl">{title}</h2>
     </div>
   );
 }
 
 function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12 ${className}`}>{children}</div>;
+  return <div className={`mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12 ${className}`}>{children}</div>;
 }
 
 /* ---------------- nav ---------------- */
@@ -138,23 +138,20 @@ function Nav() {
         </nav>
         <div className="flex items-center gap-3">
           <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><a href="#register">Register Now</a></Button>
-          <Button variant="bare"
-            aria-expanded={open}
-            aria-controls="mobile-navigation"
+          <button
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen(!open)}
             className="relative grid h-12 w-12 place-items-center lg:hidden"
           >
             <span className={`absolute h-px w-6 bg-ivory transition-transform duration-500 ${open ? "rotate-45" : "-translate-y-1"}`} />
             <span className={`absolute h-px w-6 bg-ivory transition-transform duration-500 ${open ? "-rotate-45" : "translate-y-1"}`} />
-          </Button>
+          </button>
         </div>
       </Container>
     </header>
 
       <div
-        id="mobile-navigation"
-        className={`fixed inset-x-0 bottom-0 top-16 md:top-20 z-40 overflow-y-auto overscroll-contain surface-dark transition-all duration-500 lg:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto overscroll-contain surface-dark transition-all duration-500 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -219,15 +216,26 @@ function Countdown() {
 }
 
 function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const on = () => {
+      if (ref.current) ref.current.style.transform = `translateY(${Math.min(window.scrollY, window.innerHeight) * 0.06}px)`;
+    };
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+
   return (
-    <section id="home" className="conference-hero surface-dark relative isolate flex flex-col overflow-hidden">
+    <section id="home" className="surface-dark relative isolate flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklch,var(--gold)_14%,transparent),transparent_60%)]" />
 
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
       >
-        <div className="hero-emblem-frame">
-          <div className="hero-logo-entrance flex h-full items-center justify-center">
+        <div ref={ref} className="h-[62%] max-h-[62%]">
+          <div className="hero-logo-motion flex h-full items-center justify-center">
             <img
               src={logo}
               alt=""
@@ -239,13 +247,13 @@ function Hero() {
         </div>
       </div>
 
-      <Container className="relative flex flex-1 flex-col justify-center pb-10 pt-28 md:pb-14 md:pt-32">
+      <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-20 md:pt-32">
         <div className="relative">
           <div className="relative z-10">
         <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
-          Model United Nations
+          <span className="h-px w-10 bg-gold" /> Model United Nations
         </div>
-        <h1 className="display hero-title">
+        <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[13.5rem]">
           <span className="block overflow-hidden"><span className="animate-rise block">Aurelius</span></span>
           <span className="block overflow-hidden">
             <span className="animate-rise block italic text-gold" style={{ animationDelay: "0.15s" }}>
@@ -259,7 +267,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 border-t border-line-dark pt-6 md:mt-10 md:grid-cols-[1fr_1.3fr_auto] md:items-end">
+        <div className="mt-5 grid gap-4 border-t border-line-dark pt-6 md:mt-8 md:grid-cols-[1fr_1fr_auto] md:items-end md:gap-6">
           <div>
             <p className="eyebrow text-ivory/50">Dates</p>
             <p className="mt-2 text-lg tracking-wide">{conference.datesShort}</p>
@@ -272,14 +280,14 @@ function Hero() {
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="bare" className="btn-gold"><a href="#register">Register Now</a></Button>
-            <Button asChild variant="bare" className="hero-secondary"><a href="#about">Explore the Conference</a></Button>
+            <a href="#about" className="btn-ghost">Explore the Conference</a>
           </div>
         </div>
       </Container>
 
       <a href="#about" aria-label="Scroll down" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex">
         <span className="eyebrow text-[0.6rem] text-ivory/50">Scroll</span>
-        <span className="block h-6 w-px bg-gold" />
+        <span className="animate-line block h-10 w-px bg-gold" />
       </a>
     </section>
   );
@@ -289,7 +297,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="py-16 md:py-24">
+    <section id="about" className="py-24 md:py-36">
       <Container className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="reveal flex items-center gap-4">
@@ -329,7 +337,6 @@ function Counter({ to }: { to: number }) {
     const io = new IntersectionObserver(([e]) => {
       if (!e?.isIntersecting) return;
       io.disconnect();
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setN(to); return; }
       const start = performance.now();
       const tick = (t: number) => {
         const p = Math.min(1, (t - start) / 1200);
@@ -350,7 +357,7 @@ function Details() {
     { n: 2, label: "Days" },
   ];
   return (
-    <section id="conference" className="surface-dark py-16 md:py-24">
+    <section id="conference" className="surface-dark py-24 md:py-36">
       <Container>
         <SectionHead index="II" label="The Conference" title={<>18 — 19<br /><em className="text-gold">November</em> 2026</>} dark />
         <div className="grid gap-12 border-t border-line-dark pt-12 lg:grid-cols-12">
@@ -379,28 +386,28 @@ function Details() {
 
 function Committees() {
   return (
-    <section id="committees" className="py-16 md:py-24">
+    <section id="committees" className="py-24 md:py-36">
       <Container>
         <SectionHead index="III" label="Committees" title={<>Three <em className="text-gold">chambers</em></>} />
         <div className="grid border-t border-border md:grid-cols-3">
           {committees.map((c, i) => (
             <article
               key={c.short}
-              className="reveal group relative flex flex-col border-b border-border py-8 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+              className="reveal group relative flex min-h-[460px] flex-col border-b border-border p-6 transition-colors duration-700 hover:bg-ink hover:text-ivory md:border-b-0 md:border-r md:p-10 md:last:border-r-0"
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               <div className="flex items-baseline justify-between">
                 <span className="eyebrow text-gold">{c.index}</span>
-                <span className="eyebrow text-muted-foreground">Committee</span>
+                <span className="eyebrow text-muted-foreground transition-colors group-hover:text-ivory/50">Committee</span>
               </div>
-              <h3 className="display mt-6 text-5xl transition-colors duration-300 group-hover:text-gold md:text-6xl">
+              <h3 className="display mt-10 text-7xl transition-transform duration-700 group-hover:-translate-y-1 md:text-8xl">
                 {c.short}
               </h3>
               <p className="eyebrow mt-4 leading-relaxed">{c.name}</p>
-              <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-ivory/70">
                 {c.description}
               </p>
-              <div className="mt-auto pt-6">
+              <div className="mt-auto pt-10">
                 <div className="h-px w-full bg-border transition-colors group-hover:bg-gold" />
                 <p className="eyebrow mt-4 text-gold">Agenda</p>
                 <p className="mt-2 text-sm leading-relaxed">{c.agenda ?? "To Be Announced"}</p>
@@ -417,17 +424,17 @@ function Committees() {
 
 function Agendas() {
   return (
-    <section id="agendas" className="border-t border-border py-16 md:py-24">
+    <section id="agendas" className="surface-dark py-24 md:py-36">
       <Container>
-        <SectionHead index="III·II" label="Agendas" title={<>The <em className="text-gold">agendas</em></>} />
-        <ol className="border-t border-border">
+        <SectionHead index="III·II" label="Agendas" title={<>The <em className="text-gold">agendas</em></>} dark />
+        <ol className="border-t border-line-dark">
           {committees.map((c, i) => (
-            <li key={c.short} className="reveal group grid gap-4 border-b border-border py-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-12" style={{ transitionDelay: `${i * 100}ms` }}>
+            <li key={c.short} className="reveal group grid gap-4 border-b border-line-dark py-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-12" style={{ transitionDelay: `${i * 100}ms` }}>
               <div>
                 <span className="eyebrow text-gold">{c.index}</span>
                 <p className="display mt-3 text-5xl transition-colors duration-500 group-hover:text-gold md:text-6xl">{c.short}</p>
               </div>
-              <p className="display self-end text-2xl leading-snug text-foreground sm:text-3xl">{c.agenda ?? "To Be Announced"}</p>
+              <p className="display self-end text-2xl leading-snug text-ivory/90 sm:text-3xl md:text-4xl">{c.agenda ?? "To Be Announced"}</p>
             </li>
           ))}
         </ol>
@@ -440,29 +447,29 @@ function Agendas() {
 
 function Days() {
   return (
-    <section className="bg-secondary py-16 md:py-24">
+    <section className="bg-secondary py-24 md:py-36">
       <Container>
         <SectionHead index="IV" label="Two Days · Dress Code" title={<>The <em className="text-gold">two</em> days</>} />
-        <div className="grid gap-10 md:grid-cols-2 md:gap-10">
+        <div className="grid gap-16 md:grid-cols-2 md:gap-10">
           {days.map((d, i) => (
-            <div key={d.index} className="reveal">
-              <div className="group relative aspect-[4/3] overflow-hidden">
+            <div key={d.index} className={`reveal ${i === 1 ? "md:mt-32" : ""}`}>
+              <div className="group relative aspect-[4/5] overflow-hidden">
                 <img
                   src={dayImages[i]}
                   alt={`${d.dress} attire`}
                   loading="lazy"
                   width={1024}
                   height={1280}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105"
                 />
-                <span className="eyebrow absolute bottom-4 right-4 text-ivory">
+                <span className="display absolute -bottom-6 right-4 text-[9rem] leading-none text-ivory/90 md:text-[12rem]">
                   {d.index}
                 </span>
               </div>
-              <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-5">
+              <div className="mt-8 flex items-end justify-between border-t border-border pt-6">
                 <div>
                   <p className="eyebrow text-muted-foreground">Day {d.index} · {d.date}</p>
-                  <p className="display mt-3 text-3xl md:text-4xl">{d.dress}</p>
+                  <p className="display mt-3 text-4xl md:text-5xl">{d.dress}</p>
                 </div>
                 <span className="eyebrow text-gold">Dress code</span>
               </div>
@@ -478,31 +485,31 @@ function Days() {
 
 function Register() {
   return (
-    <section id="register" className="surface-dark py-16 md:py-24">
+    <section id="register" className="surface-dark py-24 md:py-36">
       <Container>
-        <div className="reveal">
+        <div className="reveal text-center">
           <p className="eyebrow text-gold">V · Registration</p>
-          <h2 className="display mt-5 text-5xl sm:text-6xl md:text-7xl">
+          <h2 className="display mt-6 text-6xl sm:text-7xl md:text-9xl">
             Join <em className="text-gold">Aurelius</em>
           </h2>
         </div>
-        <div className="mt-10 grid border-y border-line-dark md:grid-cols-2">
+        <div className="mx-auto mt-16 grid max-w-5xl border border-line-dark md:grid-cols-2">
           {fees.map((f, i) => (
             <div
               key={f.id}
-              className={`reveal flex flex-col py-8 md:px-10 md:py-10 md:first:pl-0 md:last:pr-0 ${
+              className={`reveal group flex flex-col p-8 transition-colors duration-700 hover:bg-ink-soft md:p-12 ${
                 i === 0 ? "border-b border-line-dark md:border-b-0 md:border-r" : ""
               }`}
             >
               <p className="eyebrow text-ivory/60">{f.label}</p>
-              <p className="display mt-6 text-6xl text-gold md:text-7xl">{f.price}</p>
+              <p className="display mt-8 text-7xl text-gold md:text-8xl">{f.price}</p>
               <p className="eyebrow mt-6 text-gold">{f.earlyBird}</p>
               <p className="mt-4 min-h-12 text-ivory/70">{f.note}</p>
-              <Button asChild variant="bare" className="btn-gold mt-8 w-full sm:w-fit"><a href={(f.id === "external" ? conference.externalRegistrationUrl : REG_URL) ?? REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button>
+              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><a href={(f.id === "external" ? conference.externalRegistrationUrl : REG_URL) ?? REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button>
             </div>
           ))}
         </div>
-        <div className="reveal border-b border-line-dark py-8 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 md:py-10">
+        <div className="reveal mx-auto max-w-5xl border border-t-0 border-line-dark p-8 transition-colors duration-700 hover:bg-ink-soft md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 md:p-12">
           <div>
             <p className="eyebrow text-ivory/60">{schoolDelegation.label}</p>
             <p className="display mt-8 text-6xl text-gold md:text-7xl">{schoolDelegation.price}</p>
@@ -515,7 +522,7 @@ function Register() {
             <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
           </ul>
         </div>
-        <div className="mt-6 space-y-1 text-xs text-ivory/60">
+        <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
           {feeNotes.map((n) => <p key={n}>{n}</p>)}
           <p className="pt-3"><a href={conference.delegateMatrixUrl} target="_blank" rel="noopener noreferrer" className="eyebrow inline-flex items-center gap-2 border-b border-gold/60 pb-1 text-gold transition-colors hover:text-ivory">View Delegate Matrix <span aria-hidden>↗</span></a></p>
         </div>
@@ -533,7 +540,7 @@ function Initials({ name }: { name: string }) {
 
 function Secretariat() {
   return (
-    <section id="secretariat" className="py-16 md:py-24">
+    <section id="secretariat" className="py-24 md:py-36">
       <Container>
         <SectionHead index="VI" label="First Edition" title={<>Message from the <em className="text-gold">Secretariat</em></>} />
         <div className="reveal mb-16 grid gap-8 border-t border-border pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
@@ -545,15 +552,26 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <ol className="border-t border-border">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-10 lg:grid-cols-3">
           {secretariat.map((p, i) => (
-            <li key={p.name} className="reveal grid gap-2 border-b border-border py-6 md:grid-cols-[3rem_minmax(0,1.2fr)_minmax(0,1fr)] md:items-baseline md:gap-6">
-              <span className="eyebrow text-gold">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="display text-3xl sm:text-4xl">{p.name}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground md:text-right">{p.role ?? "To Be Announced"}</p>
-            </li>
+            <figure key={p.name} className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
+              <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">
+                {p.photo ? (
+                  <img src={p.photo} alt={p.name} loading="lazy" className="h-full w-full object-cover grayscale" />
+                ) : (
+                  <>
+                    <div className="absolute inset-3 border border-line-dark transition-all duration-700 group-hover:border-gold/40 sm:inset-6 sm:group-hover:inset-4" />
+                    <Initials name={p.name} />
+                  </>
+                )}
+              </div>
+              <figcaption className="mt-3 border-t border-border pt-3 sm:mt-6 sm:pt-5">
+                <p className="display text-xl sm:text-3xl">{p.name}</p>
+                <p className="eyebrow mt-2 text-muted-foreground">{p.role ?? "Photo coming soon"}</p>
+              </figcaption>
+            </figure>
           ))}
-        </ol>
+        </div>
       </Container>
     </section>
   );
@@ -563,7 +581,7 @@ function Secretariat() {
 
 function ExecutiveBoard() {
   return (
-    <section className="border-t border-border bg-secondary py-16 md:py-24">
+    <section className="border-t border-border bg-secondary py-24 md:py-32">
       <Container>
         <SectionHead index="VII" label="Executive Board" title={<>Executive <em className="text-gold">Board</em></>} />
         {executiveBoard.length > 0 ? (
@@ -598,7 +616,7 @@ function ExecutiveBoard() {
 
 function Schedule() {
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-24 md:py-36">
       <Container>
         <SectionHead index="VIII" label="Conference Schedule" title={<>Schedule</>} />
         <div className="grid gap-12 md:grid-cols-2">
@@ -607,7 +625,7 @@ function Schedule() {
               <p className="eyebrow text-gold">{d.day}</p>
               <ul className="mt-6 border-t border-border">
                 {d.items.map((it, i) => (
-                  <li key={i} className="flex flex-col gap-2 border-b border-border py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <li key={i} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
                     <span className="display text-2xl md:text-3xl">{it.title}</span>
                     {it.time && <span className="eyebrow shrink-0 text-muted-foreground">{it.time}</span>}
                     {!it.time && <span className="eyebrow shrink-0 text-gold">{String(i + 1).padStart(2, "0")}</span>}
@@ -627,7 +645,7 @@ function Schedule() {
 function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="surface-dark py-16 md:py-24">
+    <section id="faq" className="surface-dark py-24 md:py-36">
       <Container className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <SectionHead index="IX" label="FAQ" title={<>Questions</>} dark />
@@ -637,17 +655,17 @@ function Faq() {
             const isOpen = open === i;
             return (
               <div key={f.q} className="reveal border-b border-line-dark first:border-t">
-                <Button variant="bare"
+                <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="flex h-auto w-full items-center justify-between gap-6 whitespace-normal rounded-none px-0 py-6 text-left"
+                  className="flex w-full items-center justify-between gap-6 py-6 text-left"
                 >
                   <span className="display text-2xl md:text-3xl">{f.q}</span>
                   <span className={`relative h-4 w-4 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`}>
                     <span className="absolute left-0 top-1/2 h-px w-4 bg-gold" />
                     <span className="absolute left-1/2 top-0 h-4 w-px bg-gold" />
                   </span>
-                </Button>
+                </button>
                 <div className={`grid transition-all duration-500 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
                     <p className="max-w-2xl pb-8 text-ivory/70">{f.a}</p>
@@ -674,7 +692,7 @@ function Contact() {
     { label: "Location", value: "Open in Google Maps", href: conference.venue.mapsUrl, external: true },
   ];
   return (
-    <section id="contact" className="py-16 md:py-24">
+    <section id="contact" className="py-24 md:py-36">
       <Container>
         <SectionHead index="X" label="Contact" title={<>Find <em className="text-gold">us</em></>} />
         <div className="grid gap-12 lg:grid-cols-2">
@@ -686,9 +704,9 @@ function Contact() {
             ))}
             <dl className="mt-12 border-t border-border">
               {rows.map((r) => (
-                <div key={r.label} className="flex flex-col gap-2 border-b border-border py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <div key={r.label} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
                   <dt className="eyebrow text-muted-foreground">{r.label}</dt>
-                  <dd className="break-words sm:text-right">
+                  <dd className="break-all text-right">
                     {r.value ? (
                       r.href ? <a href={r.href} className="link-underline" {...(r.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{r.value}</a> : r.value
                     ) : (
@@ -706,7 +724,7 @@ function Contact() {
               <>
                 <img src={heroGlobe} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover opacity-40" />
                 <div className="relative flex h-full flex-col items-center justify-center p-8 text-center">
-                  
+                  <span className="mb-6 block h-3 w-3 rounded-full bg-gold ring-8 ring-gold/20" />
                   <p className="display text-3xl">Greater Noida</p>
                   <a href={conference.venue.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-6">View on Google Maps</a>
                 </div>

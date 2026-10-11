@@ -80,7 +80,7 @@
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 0.7rem;
-  letter-spacing: 0;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -88,8 +88,8 @@
 @utility display {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
 }
 
 @utility surface-dark {
@@ -99,9 +99,11 @@
 
 @utility reveal {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.65s cubic-bezier(0.2, 0.7, 0.1, 1), transform 0.65s cubic-bezier(0.2, 0.7, 0.1, 1);
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.1, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.1, 1);
+  & img { transform: scale(1.04); transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.1, 1); }
   &.is-visible { opacity: 1; transform: none; }
+  &.is-visible img { transform: none; }
 }
 html:not(.js-reveal) .reveal { opacity: 1; transform: none; }
 
@@ -109,7 +111,7 @@ html:not(.js-reveal) .reveal { opacity: 1; transform: none; }
   display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
   min-height: 48px; padding: 0 1.75rem;
   background: var(--gold); color: var(--ink);
-  font-size: 0.72rem; letter-spacing: 0; text-transform: uppercase; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700;
   transition: background 0.4s, color 0.4s;
   &:hover { background: var(--ivory); }
 }
@@ -118,7 +120,7 @@ html:not(.js-reveal) .reveal { opacity: 1; transform: none; }
   display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
   min-height: 48px; padding: 0 1.75rem;
   border: 1px solid currentColor;
-  font-size: 0.72rem; letter-spacing: 0; text-transform: uppercase; font-weight: 600;
+  font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600;
   transition: background 0.4s, color 0.4s, border-color 0.4s;
   &:hover { border-color: var(--gold); color: var(--gold); }
 }
@@ -127,7 +129,7 @@ html:not(.js-reveal) .reveal { opacity: 1; transform: none; }
   display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
   min-height: 48px; padding: 0 1.75rem;
   background: var(--ink); color: var(--ivory);
-  font-size: 0.72rem; letter-spacing: 0; text-transform: uppercase; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700;
   transition: background 0.4s, color 0.4s;
   &:hover { background: var(--gold); color: var(--ink); }
 }
@@ -151,51 +153,35 @@ html:not(.js-reveal) .reveal { opacity: 1; transform: none; }
 @keyframes float { 0%,100% { transform: translateY(0) rotate(-0.6deg); } 50% { transform: translateY(-10px) rotate(0.6deg); } }
 @utility animate-float { animation: float 9s ease-in-out infinite; }
 
-.conference-hero {
-  min-height: min(900px, calc(100svh - 3rem));
-}
-.hero-title { font-size: 112px; }
-.hero-emblem-frame {
-  position: absolute;
-  right: 2%;
-  width: 52%;
-  height: 76%;
-  max-height: 720px;
-}
-.hero-background-logo {
-  width: 100%;
-  height: 100%;
+.hero-background-logo { 
+  width: 140%;
+  height: 140%;
+  max-width: none;
   object-fit: contain;
-  opacity: 0.14;
-  mix-blend-mode: screen;
-  mask-image: radial-gradient(ellipse at center, black 26%, transparent 72%);
+
+  opacity: 0.21; 
+  mix-blend-mode: screen; 
+  mask-image: radial-gradient(ellipse at center, black 26%, transparent 70%); 
 }
-.hero-secondary {
-  min-height: 48px;
-  padding: 0;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--line-dark);
-  border-radius: 0;
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-background-logo {
+    width: 95%;
+    height: 95%;
+    max-width: none;
+  }
 }
-.hero-secondary:hover { color: var(--gold); border-color: var(--gold); }
-.conference-site [class*="tracking-"] { letter-spacing: 0; }
-@keyframes emblem-enter {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
+
+@keyframes hero-logo-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate3d(1.4%, -12px, 0) scale(1.035) rotate(0.35deg); }
+  66% { transform: translate3d(-1.4%, -5px, 0) scale(1.018) rotate(-0.35deg); }
 }
-.hero-logo-entrance { animation: emblem-enter 1.2s ease-out both; }
-section[id] { scroll-margin-top: 80px; }
-@media (min-width: 1024px) { .hero-title { font-size: 144px; } }
-@media (max-width: 639px) {
-  .hero-title { font-size: 64px; }
-  .hero-emblem-frame { right: 0; width: 80%; height: 55%; }
-  .conference-hero { min-height: calc(100svh - 3rem); }
-  .reveal { transform: translateY(8px); transition-duration: 0.5s; transition-delay: 0ms !important; }
-}
-@media (max-width: 359px) { .hero-title { font-size: 56px; } }
+
+.hero-logo-motion { animation: hero-logo-drift 38s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
+  .animate-drift, .animate-slow-spin, .animate-line, .animate-rise, .animate-float, .hero-logo-motion { animation: none; }
 }

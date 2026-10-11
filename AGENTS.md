@@ -11,5 +11,4 @@
 
 - Keep conference facts and the replaceable registration destination in the shared conference data module, so the homepage and registration page remain consistent.
 - Import the hero logo from a repository-local image asset so exported GitHub and Vercel deployments do not depend on Lovable asset serving.
-- Keep Secretariat portrait references in shared conference data, independently of the text-only presentation, so hiding photos preserves their associations for future use.
-- Use the existing reveal hook and shared CSS motion rules for one-time entrances with reduced-motion overrides, so refinements avoid new animation dependencies and scroll-driven work.
+- Store Secretariat portrait references in the shared conference data and pre-crop uploaded portraits to the existing frame ratio, so presentation styles remain unchanged.
