@@ -217,14 +217,6 @@ function Countdown() {
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const on = () => {
-      if (ref.current) ref.current.style.transform = `translateY(${Math.min(window.scrollY, window.innerHeight) * 0.06}px)`;
-    };
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
 
   return (
     <section id="home" className="surface-dark relative isolate flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
