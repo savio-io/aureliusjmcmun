@@ -219,9 +219,6 @@ function Countdown() {
 }
 
 function Hero() {
-  return () => window.removeEventListener("scroll", on);
-  }, []);
-
   return (
     <section id="home" className="conference-hero surface-dark relative isolate flex flex-col overflow-hidden">
 
