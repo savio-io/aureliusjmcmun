@@ -2,3 +2,7 @@
 - [x] Add a first-edition Secretariat message and retain replaceable portraits.
 - [x] Route registration calls to a dedicated page, with fees only in registration areas and no invented form URL.
 - [x] Remove the fee-category statistic and verify mobile and desktop presentation.
+- [ ] Inspect MOSTRAMUN and simplify the existing Aurelius presentation without changing facts or flows.
+- [ ] Replace Secretariat photo frames with a polished text-only member list.
+- [ ] Refine one-time motion and reduced-motion behavior.
+- [ ] Verify desktop/mobile layouts, navigation, registration destinations, and existing secondary pages.
