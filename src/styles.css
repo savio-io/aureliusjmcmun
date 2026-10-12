@@ -103,17 +103,14 @@
 /* Hidden state only applies once JS is confirmed, so content never stays invisible. */
 html.js-reveal .reveal:not(.is-visible) { opacity: 0; transform: translate3d(0, 24px, 0); }
 
-/* Secretariat portraits: grayscale by default, smooth fade to natural colour. */
+/* Secretariat portraits: full colour by default; when one portrait is
+   emphasised (hover on desktop, tap on touch), the others fade to grayscale. */
 .portrait {
-  filter: grayscale(1);
+  filter: grayscale(0);
   transition: filter 700ms ease-in-out;
   will-change: filter;
 }
-.portrait[data-color="true"] { filter: grayscale(0); }
-@media (hover: hover) {
-  .group:hover .portrait { filter: grayscale(0); }
-}
-.group:has(:focus-visible) .portrait { filter: grayscale(0); }
+.portrait[data-color="false"] { filter: grayscale(1); }
 
 @utility btn-gold {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;

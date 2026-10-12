@@ -531,15 +531,46 @@ function Initials({ name }: { name: string }) {
   return <span className="display text-7xl text-gold/80">{i}</span>;
 }
 
-function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number }) {
-  const [color, setColor] = useState(false);
+function useCanHover() {
+  const [can, setCan] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover)");
+    const sync = () => setCan(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return can;
+}
+
+function SecretariatCard({
+  p,
+  i,
+  active,
+  dimmed,
+  canHover,
+  onHover,
+  onToggle,
+}: {
+  p: (typeof secretariat)[number];
+  i: number;
+  active: boolean;
+  dimmed: boolean;
+  canHover: boolean;
+  onHover: () => void;
+  onToggle: () => void;
+}) {
   return (
     <figure className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
       <button
         type="button"
-        aria-pressed={color}
-        aria-label={`Show ${p.name} in ${color ? "black and white" : "colour"}`}
-        onClick={() => setColor((c) => !c)}
+        aria-pressed={active}
+        aria-label={`Emphasise ${p.name}'s photograph`}
+        onClick={canHover ? undefined : onToggle}
+        onMouseEnter={canHover ? onHover : undefined}
+        onFocus={(e) => {
+          if ((e.target as HTMLElement).matches(":focus-visible")) onHover();
+        }}
         className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[420px]:max-w-none"
       >
         {p.photo ? (
@@ -548,7 +579,7 @@ function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number 
             alt={p.name}
             loading="lazy"
             style={{ objectPosition: p.focus }}
-            data-color={color}
+            data-color={!dimmed}
             className="portrait h-full w-full object-cover"
           />
         ) : (
@@ -602,6 +633,43 @@ function SocialsStrip() {
   );
 }
 
+function SecretariatGrid() {
+  const [active, setActive] = useState<number | null>(null);
+  const canHover = useCanHover();
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Tapping (or clicking) outside the image group resets every portrait to colour.
+  useEffect(() => {
+    if (active === null) return;
+    const onDocPointer = (e: PointerEvent) => {
+      if (!gridRef.current?.contains(e.target as Node)) setActive(null);
+    };
+    document.addEventListener("pointerdown", onDocPointer);
+    return () => document.removeEventListener("pointerdown", onDocPointer);
+  }, [active]);
+
+  return (
+    <div
+      ref={gridRef}
+      className="grid grid-cols-1 gap-y-10 min-[420px]:grid-cols-2 min-[420px]:gap-x-4 sm:gap-10 lg:grid-cols-3"
+      onMouseLeave={canHover ? () => setActive(null) : undefined}
+    >
+      {secretariat.map((p, i) => (
+        <SecretariatCard
+          key={p.name}
+          p={p}
+          i={i}
+          active={active === i}
+          dimmed={active !== null && active !== i}
+          canHover={canHover}
+          onHover={() => setActive(i)}
+          onToggle={() => setActive((cur) => (cur === i ? null : i))}
+        />
+      ))}
+    </div>
+  );
+}
+
 function Secretariat() {
   return (
     <section id="secretariat" className="py-24 md:py-36">
@@ -616,9 +684,7 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-y-10 min-[420px]:grid-cols-2 min-[420px]:gap-x-4 sm:gap-10 lg:grid-cols-3">
-          {secretariat.map((p, i) => <SecretariatCard key={p.name} p={p} i={i} />)}
-        </div>
+        <SecretariatGrid />
         <SocialsStrip />
       </Container>
     </section>
