@@ -571,7 +571,7 @@ function SecretariatCard({
         onFocus={(e) => {
           if ((e.target as HTMLElement).matches(":focus-visible")) onHover();
         }}
-        className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[420px]:max-w-none"
+        className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[340px]:max-w-none"
       >
         {p.photo ? (
           <img
@@ -586,11 +586,11 @@ function SecretariatCard({
           <Initials name={p.name} />
         )}
       </button>
-      <figcaption className="mx-auto mt-3 max-w-[15rem] border-t border-border pt-3 sm:mt-6 sm:pt-5 min-[420px]:max-w-none">
-        <p className="display text-2xl sm:text-3xl">{p.name}</p>
-        <p className="eyebrow mt-2 text-muted-foreground">{p.role}</p>
+      <figcaption className="mx-auto mt-3 min-w-0 max-w-[15rem] border-t border-border pt-3 sm:mt-6 sm:pt-5 min-[340px]:max-w-none">
+        <p className="display break-words text-xl leading-tight sm:text-3xl">{p.name}</p>
+        <p className="eyebrow mt-2 break-words text-[0.6rem] leading-snug text-muted-foreground sm:text-xs">{p.role}</p>
         {p.phone && (
-          <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-gold">
+          <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 sm:mt-3 sm:gap-2 sm:text-sm transition-colors hover:text-gold">
             <Phone size={14} className="shrink-0 text-gold" /> {p.phone}
           </a>
         )}
@@ -651,7 +651,7 @@ function SecretariatGrid() {
   return (
     <div
       ref={gridRef}
-      className="grid grid-cols-1 gap-y-10 min-[420px]:grid-cols-2 min-[420px]:gap-x-4 sm:gap-10 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-y-8 min-[340px]:grid-cols-2 min-[340px]:gap-x-3 sm:gap-10 lg:grid-cols-3"
       onMouseLeave={canHover ? () => setActive(null) : undefined}
     >
       {secretariat.map((p, i) => (
