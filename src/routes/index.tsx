@@ -531,15 +531,44 @@ function Initials({ name }: { name: string }) {
   return <span className="display text-7xl text-gold/80">{i}</span>;
 }
 
-function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number }) {
-  const [color, setColor] = useState(false);
+function useCanHover() {
+  const [can, setCan] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover)");
+    const sync = () => setCan(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return can;
+}
+
+function SecretariatCard({
+  p,
+  i,
+  active,
+  dimmed,
+  canHover,
+  onHover,
+  onToggle,
+}: {
+  p: (typeof secretariat)[number];
+  i: number;
+  active: boolean;
+  dimmed: boolean;
+  canHover: boolean;
+  onHover: () => void;
+  onToggle: () => void;
+}) {
   return (
     <figure className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
       <button
         type="button"
-        aria-pressed={color}
-        aria-label={`Show ${p.name} in ${color ? "black and white" : "colour"}`}
-        onClick={() => setColor((c) => !c)}
+        aria-pressed={active}
+        aria-label={`Emphasise ${p.name}'s photograph`}
+        onClick={canHover ? undefined : onToggle}
+        onMouseEnter={canHover ? onHover : undefined}
+        onFocus={onHover}
         className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[420px]:max-w-none"
       >
         {p.photo ? (
@@ -548,7 +577,7 @@ function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number 
             alt={p.name}
             loading="lazy"
             style={{ objectPosition: p.focus }}
-            data-color={color}
+            data-color={!dimmed}
             className="portrait h-full w-full object-cover"
           />
         ) : (
