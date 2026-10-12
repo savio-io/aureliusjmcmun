@@ -548,7 +548,8 @@ function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number 
             alt={p.name}
             loading="lazy"
             style={{ objectPosition: p.focus }}
-            className={`h-full w-full object-cover transition-[filter] duration-700 ease-in-out motion-reduce:transition-none ${color ? "grayscale-0" : "grayscale group-hover:grayscale-0 group-has-[:focus-visible]:grayscale-0"}`}
+            data-color={color}
+            className="portrait h-full w-full object-cover"
           />
         ) : (
           <Initials name={p.name} />
