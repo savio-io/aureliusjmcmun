@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
 import logo from "@/assets/aurelius-hero-logo.jpg";
@@ -530,6 +531,56 @@ function Initials({ name }: { name: string }) {
   return <span className="display text-7xl text-gold/80">{i}</span>;
 }
 
+function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number }) {
+  const [color, setColor] = useState(false);
+  return (
+    <figure className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
+      <button
+        type="button"
+        aria-pressed={color}
+        aria-label={`Show ${p.name} in ${color ? "black and white" : "colour"}`}
+        onClick={() => setColor((c) => !c)}
+        className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[420px]:max-w-none"
+      >
+        {p.photo ? (
+          <img
+            src={p.photo}
+            alt={p.name}
+            loading="lazy"
+            style={{ objectPosition: p.focus }}
+            className={`h-full w-full object-cover transition-[filter] duration-700 motion-reduce:transition-none ${color ? "grayscale-0" : "grayscale group-hover:grayscale-0 group-focus-within:grayscale-0"}`}
+          />
+        ) : (
+          <Initials name={p.name} />
+        )}
+      </button>
+      <figcaption className="mx-auto mt-3 max-w-[15rem] border-t border-border pt-3 sm:mt-6 sm:pt-5 min-[420px]:max-w-none">
+        <p className="display text-2xl sm:text-3xl">{p.name}</p>
+        <p className="eyebrow mt-2 text-muted-foreground">{p.role}</p>
+        {p.phone && (
+          <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-gold">
+            <Phone size={14} className="shrink-0 text-gold" /> {p.phone}
+          </a>
+        )}
+      </figcaption>
+    </figure>
+  );
+}
+
+function SocialsStrip() {
+  return (
+    <div className="reveal mt-20 flex flex-col gap-5 border-y border-border py-8 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className="eyebrow text-gold">Aurelius Socials</p>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">Beyond the committee rooms — follow Aurelius MUN for Socials updates and announcements.</p>
+      </div>
+      {conference.contact.instagram && (
+        <a href={conference.contact.instagram} target="_blank" rel="noreferrer" className="eyebrow link-underline shrink-0 self-start text-foreground sm:self-auto">Explore Socials →</a>
+      )}
+    </div>
+  );
+}
+
 function Secretariat() {
   return (
     <section id="secretariat" className="py-24 md:py-36">
@@ -544,26 +595,10 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-10 lg:grid-cols-3">
-          {secretariat.map((p, i) => (
-            <figure key={p.name} className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
-              <div className="surface-dark relative grid aspect-[4/5] place-items-center overflow-hidden">
-                {p.photo ? (
-                  <img src={p.photo} alt={p.name} loading="lazy" className="h-full w-full object-cover grayscale" />
-                ) : (
-                  <>
-                    <div className="absolute inset-3 border border-line-dark transition-all duration-700 group-hover:border-gold/40 sm:inset-6 sm:group-hover:inset-4" />
-                    <Initials name={p.name} />
-                  </>
-                )}
-              </div>
-              <figcaption className="mt-3 border-t border-border pt-3 sm:mt-6 sm:pt-5">
-                <p className="display text-xl sm:text-3xl">{p.name}</p>
-                <p className="eyebrow mt-2 text-muted-foreground">{p.role ?? "Photo coming soon"}</p>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="grid grid-cols-1 gap-y-10 min-[420px]:grid-cols-2 min-[420px]:gap-x-4 sm:gap-10 lg:grid-cols-3">
+          {secretariat.map((p, i) => <SecretariatCard key={p.name} p={p} i={i} />)}
         </div>
+        <SocialsStrip />
       </Container>
     </section>
   );
