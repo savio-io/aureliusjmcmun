@@ -139,7 +139,7 @@ export const secretariat: Person[] = [
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
 export const executiveBoard: { committee: string; name: string; role: string; photo: string | null }[] = [];
 
-export const schedule: { day: string; dress: string | null; items: { time: string | null; title: string }[] }[] = [
+export const schedule: { day: string; dress: string | null; items: { time: string | null; title: string; highlight?: boolean }[] }[] = [
   {
     day: "Day 01",
     dress: "Traditional Indian",
@@ -161,6 +161,7 @@ export const schedule: { day: string; dress: string | null; items: { time: strin
       { title: "Session 4", time: "11:15 AM – 1:45 PM" },
       { title: "Closing and Award Ceremony", time: "1:45 PM – 3:45 PM" },
       { title: "High Tea", time: "3:45 PM – 4:30 PM" },
+      { title: "Aurelius Socials", time: "4:30 PM – 5:30 PM", highlight: true },
     ],
   },
 ];
