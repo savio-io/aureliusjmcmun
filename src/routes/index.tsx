@@ -568,7 +568,9 @@ function SecretariatCard({
         aria-label={`Emphasise ${p.name}'s photograph`}
         onClick={canHover ? undefined : onToggle}
         onMouseEnter={canHover ? onHover : undefined}
-        onFocus={onHover}
+        onFocus={(e) => {
+          if ((e.target as HTMLElement).matches(":focus-visible")) onHover();
+        }}
         className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[420px]:max-w-none"
       >
         {p.photo ? (
