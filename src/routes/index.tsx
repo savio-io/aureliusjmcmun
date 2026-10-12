@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
 import logo from "@/assets/aurelius-hero-logo.jpg";
