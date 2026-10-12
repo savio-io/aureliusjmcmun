@@ -154,7 +154,7 @@ export const schedule: { day: string; dress: string | null; items: { time: strin
   },
   {
     day: "Day 02 | 19 November 2026",
-    dress: null,
+    dress: "Western Formals",
     items: [
       { title: "Session 3", time: "8:00 AM – 10:30 AM" },
       { title: "Lunch", time: "10:30 AM – 11:15 AM" },
