@@ -190,6 +190,7 @@ html.js-reveal .reveal:not(.is-visible) { opacity: 0; transform: translate3d(0, 
 .hero-logo-motion { animation: hero-logo-drift 38s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; }
+  .reveal, html.js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; transition: none; }
+  .portrait { transition: none; }
   .animate-drift, .animate-slow-spin, .animate-line, .animate-rise, .animate-float, .hero-logo-motion { animation: none; }
 }
