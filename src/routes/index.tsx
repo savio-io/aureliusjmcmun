@@ -548,7 +548,7 @@ function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number 
             alt={p.name}
             loading="lazy"
             style={{ objectPosition: p.focus }}
-            className={`h-full w-full object-cover transition-[filter] duration-700 motion-reduce:transition-none ${color ? "grayscale-0" : "grayscale group-hover:grayscale-0 group-focus-within:grayscale-0"}`}
+            className={`h-full w-full object-cover transition-[filter] duration-700 ease-in-out motion-reduce:transition-none ${color ? "grayscale-0" : "grayscale group-hover:grayscale-0 group-has-[:focus-visible]:grayscale-0"}`}
           />
         ) : (
           <Initials name={p.name} />
@@ -569,15 +569,15 @@ function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number 
 
 function SocialsStrip() {
   return (
-    <div className="reveal mt-20 flex flex-col gap-5 border-y border-border py-8 sm:flex-row sm:items-center sm:justify-between">
+    <section aria-labelledby="socials-title" className="reveal surface-dark mt-20 px-6 py-12 sm:px-10 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:items-center md:gap-12 md:py-16">
       <div>
-        <p className="eyebrow text-gold">Aurelius Socials</p>
-        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">Beyond the committee rooms — follow Aurelius MUN for Socials updates and announcements.</p>
+        <p className="eyebrow text-gold">Music · Dance · Connection</p>
+        <h3 id="socials-title" className="display mt-4 text-4xl sm:text-5xl">Aurelius <em className="text-gold">Socials</em></h3>
       </div>
-      {conference.contact.instagram && (
-        <a href={conference.contact.instagram} target="_blank" rel="noreferrer" className="eyebrow link-underline shrink-0 self-start text-foreground sm:self-auto">Explore Socials →</a>
-      )}
-    </div>
+      <p className="mt-6 max-w-2xl text-base leading-relaxed text-ivory/70 md:mt-0">
+        “Beyond debate, discover the other side of Aurelius. Aurelius Socials brings delegates together through music, dance, and shared experiences, creating the perfect space to meet new people, make connections, and enjoy the conference beyond committee rooms.”
+      </p>
+    </section>
   );
 }
 
@@ -643,16 +643,18 @@ function ExecutiveBoard() {
 
 function Schedule() {
   return (
-    <section className="py-24 md:py-36">
+    <section id="itinerary" className="py-24 md:py-36">
       <Container>
-        <SectionHead index="VIII" label="Conference Schedule" title={<>Schedule</>} />
+        <SectionHead index="VIII" label="AURELIUS MUN '26" title={<>Itinerary</>} />
+        <p className="reveal eyebrow -mt-8 mb-12 text-gold md:-mt-12">“AUT VERITA TE AUT NUDUS”</p>
         <div className="grid gap-12 md:grid-cols-2">
           {schedule.map((d) => (
             <div key={d.day} className="reveal">
               <p className="eyebrow text-gold">{d.day}</p>
+              {d.dress && <p className="mt-2 text-sm text-muted-foreground">Dress Code: {d.dress}</p>}
               <ul className="mt-6 border-t border-border">
                 {d.items.map((it, i) => (
-                  <li key={i} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
+                  <li key={i} className="flex flex-col gap-1 border-b border-border py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:py-5">
                     <span className="display text-2xl md:text-3xl">{it.title}</span>
                     {it.time && <span className="eyebrow shrink-0 text-muted-foreground">{it.time}</span>}
                     {!it.time && <span className="eyebrow shrink-0 text-gold">{String(i + 1).padStart(2, "0")}</span>}

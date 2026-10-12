@@ -129,8 +129,8 @@ export type Person = {
 };
 
 export const secretariat: Person[] = [
-  { name: "Savio Jose", role: "Founder & Director General", photo: savioPhoto, focus: "50% 22%", phone: "+91 93184 69083", instagram: null },
-  { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: adityaPhoto, focus: "50% 30%", phone: "+91 95607 14048", instagram: null },
+  { name: "Savio Jose", role: "Founder & Director General", photo: savioPhoto, focus: "50% 22%", phone: "+91 95607 14048", instagram: null },
+  { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: adityaPhoto, focus: "50% 30%", phone: "+91 93184 69083", instagram: null },
   { name: "Aradhya Shakya", role: "Deputy Director General", photo: aradhyaPhoto, focus: "50% 25%", phone: "+91 98377 43436", instagram: null },
   { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto, focus: "48% 30%", phone: "+91 70657 74620", instagram: null },
   { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto, focus: "50% 75%", phone: "+91 94569 19571", instagram: null },
@@ -139,15 +139,29 @@ export const secretariat: Person[] = [
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
 export const executiveBoard: { committee: string; name: string; role: string; photo: string | null }[] = [];
 
-/** Add a `time` to any item once timings are announced. */
-export const schedule: { day: string; items: { time: string | null; title: string }[] }[] = [
+export const schedule: { day: string; dress: string | null; items: { time: string | null; title: string }[] }[] = [
   {
-    day: "Day 01 · 18 November",
-    items: ["Opening Ceremony", "Session 1", "Lunch", "Session 2", "High Tea"].map((title) => ({ time: null, title })),
+    day: "Day 01",
+    dress: "Traditional Indian",
+    items: [
+      { title: "Registration", time: "8:00 AM – 9:00 AM" },
+      { title: "Opening Ceremony", time: "9:00 AM – 9:45 AM" },
+      { title: "Session 1", time: "9:45 AM – 12:00 PM" },
+      { title: "Lunch", time: "12:00 PM – 12:45 PM" },
+      { title: "Session 2", time: "12:45 PM – 3:45 PM" },
+      { title: "High Tea", time: "3:45 PM – 4:30 PM" },
+    ],
   },
   {
-    day: "Day 02 · 19 November",
-    items: ["Session 3", "Lunch", "Session 4", "Closing & Award Ceremony", "High Tea"].map((title) => ({ time: null, title })),
+    day: "Day 02 | 19 November 2026",
+    dress: null,
+    items: [
+      { title: "Session 3", time: "8:00 AM – 10:30 AM" },
+      { title: "Lunch", time: "10:30 AM – 11:15 AM" },
+      { title: "Session 4", time: "11:15 AM – 1:45 PM" },
+      { title: "Closing and Award Ceremony", time: "1:45 PM – 3:45 PM" },
+      { title: "High Tea", time: "3:45 PM – 4:30 PM" },
+    ],
   },
 ];
 
