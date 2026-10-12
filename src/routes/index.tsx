@@ -681,9 +681,24 @@ function Schedule() {
               </div>
               <ul className="mt-6 border-t border-border">
                 {d.items.map((it, i) => (
-                  <li key={i} className="flex flex-col gap-1 border-b border-border py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:py-5">
-                    <span className="display text-2xl [font-variant-numeric:lining-nums] md:text-3xl">{it.title}</span>
-                    {it.time && <span className="shrink-0 text-sm font-medium tracking-wide text-muted-foreground tabular-nums">{it.time}</span>}
+                  <li
+                    key={i}
+                    className={`flex flex-col gap-1 border-b py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:py-5 ${
+                      it.highlight ? "border-gold/30 bg-gradient-to-r from-gold/[0.07] to-transparent" : "border-border"
+                    }`}
+                  >
+                    <span className={`display text-2xl [font-variant-numeric:lining-nums] md:text-3xl ${it.highlight ? "text-gold" : ""}`}>
+                      {it.title}
+                    </span>
+                    {it.time && (
+                      <span
+                        className={`shrink-0 text-sm font-medium tracking-wide tabular-nums ${
+                          it.highlight ? "text-gold/80" : "text-muted-foreground"
+                        }`}
+                      >
+                        {it.time}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
