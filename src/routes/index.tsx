@@ -570,14 +570,34 @@ function SecretariatCard({ p, i }: { p: (typeof secretariat)[number]; i: number 
 
 function SocialsStrip() {
   return (
-    <section aria-labelledby="socials-title" className="reveal surface-dark mt-20 px-6 py-12 sm:px-10 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:items-center md:gap-12 md:py-16">
-      <div>
-        <p className="eyebrow text-gold">Music · Dance · Connection</p>
-        <h3 id="socials-title" className="display mt-4 text-4xl sm:text-5xl">Aurelius <em className="text-gold">Socials</em></h3>
+    <section
+      aria-labelledby="socials-title"
+      className="reveal surface-dark group/soc relative isolate mt-24 overflow-hidden border border-gold/25 px-6 py-14 sm:px-10 md:mt-32 md:px-16 md:py-24"
+    >
+      <div aria-hidden="true" className="socials-glow pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-3 -z-10 border border-line-dark transition-colors duration-700 group-hover/soc:border-gold/30 md:inset-5" />
+      <div className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-end md:gap-16">
+        <div>
+          <div className="flex items-center gap-4">
+            <span className="h-px w-10 bg-gold transition-all duration-700 group-hover/soc:w-16" />
+            <p className="eyebrow text-gold">Music · Dance · Connection</p>
+          </div>
+          <h3 id="socials-title" className="display mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+            Aurelius
+            <em className="block text-gold">Socials</em>
+          </h3>
+        </div>
+        <div>
+          <p className="text-base leading-relaxed text-ivory/75 md:text-lg">
+            “Beyond debate, discover the other side of Aurelius. Aurelius Socials brings delegates together through music, dance, and shared experiences, creating the perfect space to meet new people, make connections, and enjoy the conference beyond committee rooms.”
+          </p>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-line-dark pt-6">
+            {["Music", "Dance", "New Connections"].map((t) => (
+              <li key={t} className="eyebrow text-ivory/60 transition-colors duration-500 hover:text-gold">{t}</li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <p className="mt-6 max-w-2xl text-base leading-relaxed text-ivory/70 md:mt-0">
-        “Beyond debate, discover the other side of Aurelius. Aurelius Socials brings delegates together through music, dance, and shared experiences, creating the perfect space to meet new people, make connections, and enjoy the conference beyond committee rooms.”
-      </p>
     </section>
   );
 }
@@ -649,16 +669,21 @@ function Schedule() {
         <SectionHead index="VIII" label="AURELIUS MUN '26" title={<>Itinerary</>} />
         <p className="reveal eyebrow -mt-8 mb-12 text-gold md:-mt-12">“AUT VERITA TE AUT NUDUS”</p>
         <div className="grid gap-12 md:grid-cols-2">
-          {schedule.map((d) => (
-            <div key={d.day} className="reveal">
-              <p className="eyebrow text-gold">{d.day}</p>
-              {d.dress && <p className="mt-2 text-sm text-muted-foreground">Dress Code: {d.dress}</p>}
+          {schedule.map((d, di) => (
+            <div key={d.day} className="reveal" style={{ transitionDelay: `${di * 120}ms` }}>
+              <div className="flex min-h-[3.25rem] flex-col justify-end gap-2">
+                <p className="eyebrow text-gold">{d.day}</p>
+                {d.dress && (
+                  <p className="eyebrow text-muted-foreground">
+                    Dress Code · <span className="text-foreground">{d.dress}</span>
+                  </p>
+                )}
+              </div>
               <ul className="mt-6 border-t border-border">
                 {d.items.map((it, i) => (
                   <li key={i} className="flex flex-col gap-1 border-b border-border py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:py-5">
-                    <span className="display text-2xl md:text-3xl">{it.title}</span>
-                    {it.time && <span className="eyebrow shrink-0 text-muted-foreground">{it.time}</span>}
-                    {!it.time && <span className="eyebrow shrink-0 text-gold">{String(i + 1).padStart(2, "0")}</span>}
+                    <span className="display text-2xl [font-variant-numeric:lining-nums] md:text-3xl">{it.title}</span>
+                    {it.time && <span className="shrink-0 text-sm font-medium tracking-wide text-muted-foreground tabular-nums">{it.time}</span>}
                   </li>
                 ))}
               </ul>
