@@ -98,14 +98,22 @@
 }
 
 @utility reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.1, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.1, 1);
-  & img { transform: scale(1.04); transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.1, 1); }
-  &.is-visible { opacity: 1; transform: none; }
-  &.is-visible img { transform: none; }
+  transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-html:not(.js-reveal) .reveal { opacity: 1; transform: none; }
+/* Hidden state only applies once JS is confirmed, so content never stays invisible. */
+html.js-reveal .reveal:not(.is-visible) { opacity: 0; transform: translate3d(0, 24px, 0); }
+
+/* Secretariat portraits: grayscale by default, smooth fade to natural colour. */
+.portrait {
+  filter: grayscale(1);
+  transition: filter 700ms ease-in-out;
+  will-change: filter;
+}
+.portrait[data-color="true"] { filter: grayscale(0); }
+@media (hover: hover) {
+  .group:hover .portrait { filter: grayscale(0); }
+}
+.group:has(:focus-visible) .portrait { filter: grayscale(0); }
 
 @utility btn-gold {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;

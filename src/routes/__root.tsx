@@ -83,6 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Aurelius MUN" },
     ],
+    scripts: [
+      {
+        // Hide reveal elements before first paint (no flash), with a safety net that shows everything if the observer never runs.
+        children:
+          "document.documentElement.classList.add('js-reveal');setTimeout(function(){if(!window.__revealReady)document.documentElement.classList.remove('js-reveal')},4000);",
+      },
+    ],
     links: [
       {
         rel: "stylesheet",
