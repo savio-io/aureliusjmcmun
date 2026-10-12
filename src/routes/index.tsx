@@ -631,6 +631,43 @@ function SocialsStrip() {
   );
 }
 
+function SecretariatGrid() {
+  const [active, setActive] = useState<number | null>(null);
+  const canHover = useCanHover();
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Tapping (or clicking) outside the image group resets every portrait to colour.
+  useEffect(() => {
+    if (active === null) return;
+    const onDocPointer = (e: PointerEvent) => {
+      if (!gridRef.current?.contains(e.target as Node)) setActive(null);
+    };
+    document.addEventListener("pointerdown", onDocPointer);
+    return () => document.removeEventListener("pointerdown", onDocPointer);
+  }, [active]);
+
+  return (
+    <div
+      ref={gridRef}
+      className="grid grid-cols-1 gap-y-10 min-[420px]:grid-cols-2 min-[420px]:gap-x-4 sm:gap-10 lg:grid-cols-3"
+      onMouseLeave={canHover ? () => setActive(null) : undefined}
+    >
+      {secretariat.map((p, i) => (
+        <SecretariatCard
+          key={p.name}
+          p={p}
+          i={i}
+          active={active === i}
+          dimmed={active !== null && active !== i}
+          canHover={canHover}
+          onHover={() => setActive(i)}
+          onToggle={() => setActive((cur) => (cur === i ? null : i))}
+        />
+      ))}
+    </div>
+  );
+}
+
 function Secretariat() {
   return (
     <section id="secretariat" className="py-24 md:py-36">
