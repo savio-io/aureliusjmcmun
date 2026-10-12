@@ -660,7 +660,7 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={active !== null && active !== i}
+          dimmed={canHover ? active !== null && active !== i : active !== i}
           canHover={canHover}
           onHover={() => setActive(i)}
           onToggle={() => setActive((cur) => (cur === i ? null : i))}
