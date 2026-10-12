@@ -645,9 +645,7 @@ function Secretariat() {
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-y-10 min-[420px]:grid-cols-2 min-[420px]:gap-x-4 sm:gap-10 lg:grid-cols-3">
-          {secretariat.map((p, i) => <SecretariatCard key={p.name} p={p} i={i} />)}
-        </div>
+        <SecretariatGrid />
         <SocialsStrip />
       </Container>
     </section>
