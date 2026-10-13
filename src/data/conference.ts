@@ -43,14 +43,14 @@ export const fees = [
     label: "Internal Delegates",
     price: "₹1,600",
     note: "For delegates from Jesus and Mary Convent School.",
-    earlyBird: "Early Bird Fee · Valid until 30 October 2026",
+    earlyBird: "Early Bird Fee · Valid until 4 November 2026",
   },
   {
     id: "external",
     label: "External Delegates",
     price: "₹2,000",
     note: "For delegates from other schools and institutions.",
-    earlyBird: "Early Bird Fee · Valid until 30 October 2026",
+    earlyBird: "Early Bird Fee · Valid until 4 November 2026",
   },
 ];
 
@@ -64,6 +64,16 @@ export const schoolDelegation = {
     "An additional ₹500 is paid once by the school, regardless of whether there are 8, 9, 10 or more delegates.",
     "School Delegations are eligible for the Best School Delegation award.",
   ],
+};
+
+export const registrationDates = [
+  { label: "Early Bird Registration Deadline", date: "4 November 2026" },
+  { label: "Last Date for Registration", date: "15 November 2026" },
+];
+
+export const committeePolicy = {
+  title: "Committee Dissolution Policy",
+  text: "Any committee with fewer than 15 delegates will be dissolved one week before the conference.",
 };
 
 export const feeNotes = ["Fees are non-negotiable.", "No refunds will be provided once registration is confirmed."];
@@ -114,8 +124,8 @@ export const committees: Committee[] = [
 ];
 
 export const days = [
-  { index: "01", date: "18 November", dress: "Traditional Indian" },
-  { index: "02", date: "19 November", dress: "Formal Western" },
+  { index: "01", date: "18 November", dress: "Western Formals" },
+  { index: "02", date: "19 November", dress: "Traditional Indian" },
 ];
 
 export type Person = {
@@ -142,7 +152,7 @@ export const executiveBoard: { committee: string; name: string; role: string; ph
 export const schedule: { day: string; dress: string | null; items: { time: string | null; title: string; highlight?: boolean }[] }[] = [
   {
     day: "Day 01",
-    dress: "Traditional Indian",
+    dress: "Western Formals",
     items: [
       { title: "Registration", time: "8:00 AM – 9:00 AM" },
       { title: "Opening Ceremony", time: "9:00 AM – 9:45 AM" },
@@ -154,14 +164,15 @@ export const schedule: { day: string; dress: string | null; items: { time: strin
   },
   {
     day: "Day 02 | 19 November 2026",
-    dress: "Western Formals",
+    dress: "Traditional Indian",
     items: [
-      { title: "Session 3", time: "8:00 AM – 10:30 AM" },
-      { title: "Lunch", time: "10:30 AM – 11:15 AM" },
-      { title: "Session 4", time: "11:15 AM – 1:45 PM" },
-      { title: "Closing and Award Ceremony", time: "1:45 PM – 3:45 PM" },
-      { title: "High Tea", time: "3:45 PM – 4:30 PM" },
-      { title: "Aurelius Socials", time: "4:30 PM – 5:30 PM", highlight: true },
+      { title: "Session 3", time: "8:00 AM – 10:00 AM" },
+      { title: "Breakfast", time: "10:00 AM – 10:45 AM" },
+      { title: "Session 4", time: "10:45 AM – 12:15 PM" },
+      { title: "Lunch", time: "12:15 PM – 1:00 PM" },
+      { title: "Session 5", time: "1:00 PM – 3:30 PM" },
+      { title: "High Tea", time: "3:30 PM – 4:00 PM" },
+      { title: "Aurelius Socials", time: "4:00 PM – 5:00 PM", highlight: true },
     ],
   },
 ];
@@ -180,7 +191,7 @@ export const faqs = [
     q: "What committees are available?",
     a: "United Nations General Assembly (UNGA), World Health Organization (WHO) and All India Political Parties Meet (AIPPM).",
   },
-  { q: "What is the dress code?", a: "Day 1: Traditional Indian. Day 2: Formal Western." },
+  { q: "What is the dress code?", a: "Day 1: Western Formals. Day 2: Traditional Indian." },
   { q: "What are the agendas?", a: "UNGA: Addressing the Global Refugee Crisis with Special Emphasis on Equitable Responsibility-Sharing and Refugee Integration. WHO: Strengthening Global Health Security and Pandemic Response with Special Emphasis on Vaccine Equity and Early Outbreak Detection. AIPPM: Deliberation on India’s Response to Cross-Border Terrorism and Regional Security." },
   { q: "When will the Executive Board be announced?", a: "To be announced." },
 ];
