@@ -103,8 +103,7 @@
 /* Hidden state only applies once JS is confirmed, so content never stays invisible. */
 html.js-reveal .reveal:not(.is-visible) { opacity: 0; transform: translate3d(0, 24px, 0); }
 
-/* Secretariat portraits: full colour by default; when one portrait is
-   emphasised (hover on desktop, tap on touch), the others fade to grayscale. */
+/* Secretariat portraits: grayscale by default; the active one fades to colour. */
 .portrait {
   filter: grayscale(0);
   transition: filter 700ms ease-in-out;
