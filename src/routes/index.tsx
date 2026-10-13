@@ -90,15 +90,27 @@ function SectionHead({
       <div className="flex items-center gap-4">
         <span className="eyebrow text-gold">{index}</span>
         <span className={`h-px w-12 ${dark ? "bg-line-dark" : "bg-border"}`} />
-        <span className={`eyebrow ${dark ? "text-ivory/60" : "text-muted-foreground"}`}>{label}</span>
+        <span className={`eyebrow ${dark ? "text-ivory/60" : "text-muted-foreground"}`}>
+          {label}
+        </span>
       </div>
       <h2 className="display mt-6 text-5xl sm:text-6xl md:text-7xl lg:text-8xl">{title}</h2>
     </div>
   );
 }
 
-function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12 ${className}`}>{children}</div>;
+function Container({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12 ${className}`}>
+      {children}
+    </div>
+  );
 }
 
 /* ---------------- nav ---------------- */
@@ -115,43 +127,60 @@ function Nav() {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     document.documentElement.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; document.documentElement.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [open]);
 
   return (
     <>
-    <header
-      className={`fixed inset-x-0 top-0 z-50 text-ivory transition-all duration-500 ${
-        open ? "bg-ink lg:bg-transparent" : ""
-      } ${
-        open ? "border-b border-line-dark" : scrolled ? "border-b border-line-dark bg-ink/85 backdrop-blur-md" : "bg-transparent"
-      }`}
-    >
-      <Container className="flex h-16 items-center justify-between md:h-20">
-        <a href="#home" className="flex shrink-0 items-baseline gap-2">
-          <span className="display text-2xl tracking-[0.12em]">AURELIUS</span>
-          <span className="eyebrow text-gold">MUN</span>
-        </a>
-        <nav className="hidden items-center gap-4 xl:gap-5 lg:flex">
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="eyebrow link-underline text-[0.62rem] tracking-[0.22em] text-ivory/75 hover:text-ivory">
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">
-          <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex"><a href="#register">Register Now</a></Button>
-          <button
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen(!open)}
-            className="relative grid h-12 w-12 place-items-center lg:hidden"
-          >
-            <span className={`absolute h-px w-6 bg-ivory transition-transform duration-500 ${open ? "rotate-45" : "-translate-y-1"}`} />
-            <span className={`absolute h-px w-6 bg-ivory transition-transform duration-500 ${open ? "-rotate-45" : "translate-y-1"}`} />
-          </button>
-        </div>
-      </Container>
-    </header>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 text-ivory transition-all duration-500 ${
+          open ? "bg-ink lg:bg-transparent" : ""
+        } ${
+          open
+            ? "border-b border-line-dark"
+            : scrolled
+              ? "border-b border-line-dark bg-ink/85 backdrop-blur-md"
+              : "bg-transparent"
+        }`}
+      >
+        <Container className="flex h-16 items-center justify-between md:h-20">
+          <a href="#home" className="flex shrink-0 items-baseline gap-2">
+            <span className="display text-2xl tracking-[0.12em]">AURELIUS</span>
+            <span className="eyebrow text-gold">MUN</span>
+          </a>
+          <nav className="hidden items-center gap-4 xl:gap-5 lg:flex">
+            {navLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="eyebrow link-underline text-[0.62rem] tracking-[0.22em] text-ivory/75 hover:text-ivory"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-3">
+            <Button asChild variant="bare" className="btn-gold hidden sm:inline-flex">
+              <a href="#register">Register Now</a>
+            </Button>
+            <button
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setOpen(!open)}
+              className="relative grid h-12 w-12 place-items-center lg:hidden"
+            >
+              <span
+                className={`absolute h-px w-6 bg-ivory transition-transform duration-500 ${open ? "rotate-45" : "-translate-y-1"}`}
+              />
+              <span
+                className={`absolute h-px w-6 bg-ivory transition-transform duration-500 ${open ? "-rotate-45" : "translate-y-1"}`}
+              />
+            </button>
+          </div>
+        </Container>
+      </header>
 
       <div
         className={`fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto overscroll-contain surface-dark transition-all duration-500 lg:hidden ${
@@ -173,7 +202,11 @@ function Nav() {
               </li>
             ))}
           </ul>
-          <Button asChild variant="bare" className="btn-gold w-full"><a href="#register" onClick={() => setOpen(false)}>Register Now</a></Button>
+          <Button asChild variant="bare" className="btn-gold w-full">
+            <a href="#register" onClick={() => setOpen(false)}>
+              Register Now
+            </a>
+          </Button>
         </Container>
       </div>
     </>
@@ -206,10 +239,21 @@ function Countdown() {
       <div className="flex items-start gap-2 sm:gap-5">
         {values.map((item, i) => (
           <div key={item.label} className="flex items-start gap-2 sm:gap-5">
-            {i > 0 && <span aria-hidden="true" className="display text-2xl text-gold/70 sm:text-4xl">:</span>}
+            {i > 0 && (
+              <span aria-hidden="true" className="display text-2xl text-gold/70 sm:text-4xl">
+                :
+              </span>
+            )}
             <div className="min-w-10 text-center sm:min-w-16">
-              <span className="display block tabular-nums text-3xl text-ivory sm:text-5xl" suppressHydrationWarning>{remaining === null ? "--" : String(item.value).padStart(2, "0")}</span>
-              <span className="mt-2 block text-[0.55rem] font-semibold uppercase tracking-widest text-ivory/60 sm:text-[0.65rem]">{item.label}</span>
+              <span
+                className="display block tabular-nums text-3xl text-ivory sm:text-5xl"
+                suppressHydrationWarning
+              >
+                {remaining === null ? "--" : String(item.value).padStart(2, "0")}
+              </span>
+              <span className="mt-2 block text-[0.55rem] font-semibold uppercase tracking-widest text-ivory/60 sm:text-[0.65rem]">
+                {item.label}
+              </span>
             </div>
           </div>
         ))}
@@ -222,7 +266,10 @@ function Hero() {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="home" className="surface-dark relative isolate flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden">
+    <section
+      id="home"
+      className="surface-dark relative isolate flex min-h-[calc(100svh-3rem)] flex-col overflow-hidden"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklch,var(--gold)_14%,transparent),transparent_60%)]" />
 
       <div
@@ -245,20 +292,25 @@ function Hero() {
       <Container className="relative flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-20 md:pt-32">
         <div className="relative">
           <div className="relative z-10">
-        <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
-          <span className="h-px w-10 bg-gold" /> Model United Nations
-        </div>
-        <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[13.5rem]">
-          <span className="block overflow-hidden"><span className="animate-rise block">Aurelius</span></span>
-          <span className="block overflow-hidden">
-            <span className="animate-rise block italic text-gold" style={{ animationDelay: "0.15s" }}>
-              MUN 2026
-            </span>
-          </span>
-        </h1>
-        <span className="sr-only">Aurelius MUN official logo</span>
+            <div className="eyebrow mb-6 flex items-center gap-4 text-gold md:mb-8">
+              <span className="h-px w-10 bg-gold" /> Model United Nations
+            </div>
+            <h1 className="display text-[22vw] sm:text-[17vw] lg:text-[13.5rem]">
+              <span className="block overflow-hidden">
+                <span className="animate-rise block">Aurelius</span>
+              </span>
+              <span className="block overflow-hidden">
+                <span
+                  className="animate-rise block italic text-gold"
+                  style={{ animationDelay: "0.15s" }}
+                >
+                  MUN 2026
+                </span>
+              </span>
+            </h1>
+            <span className="sr-only">Aurelius MUN official logo</span>
 
-        <Countdown />
+            <Countdown />
           </div>
         </div>
 
@@ -274,13 +326,21 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="bare" className="btn-gold"><a href="#register">Register Now</a></Button>
-            <a href="#about" className="btn-ghost">Explore the Conference</a>
+            <Button asChild variant="bare" className="btn-gold">
+              <a href="#register">Register Now</a>
+            </Button>
+            <a href="#about" className="btn-ghost">
+              Explore the Conference
+            </a>
           </div>
         </div>
       </Container>
 
-      <a href="#about" aria-label="Scroll down" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex">
+      <a
+        href="#about"
+        aria-label="Scroll down"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
+      >
         <span className="eyebrow text-[0.6rem] text-ivory/50">Scroll</span>
         <span className="animate-line block h-10 w-px bg-gold" />
       </a>
@@ -303,16 +363,17 @@ function About() {
         </div>
         <div className="lg:col-span-8">
           <p className="reveal display text-4xl leading-[1.08] sm:text-5xl md:text-6xl">
-            Two days of structured debate, <em className="text-gold">diplomacy</em> and considered discussion.
+            Two days of structured debate, <em className="text-gold">diplomacy</em> and considered
+            discussion.
           </p>
           <div className="reveal mt-12 grid gap-8 text-base leading-relaxed text-muted-foreground md:grid-cols-2">
             <p>
-              Aurelius MUN 2026 is a Model United Nations conference hosted at Jesus and Mary Convent School,
-              Greater Noida, on 18 and 19 November 2026.
+              Aurelius MUN 2026 is a Model United Nations conference hosted at Jesus and Mary
+              Convent School, Greater Noida, on 18 and 19 November 2026.
             </p>
             <p>
-              Across three committees, delegates will represent nations and leaders, negotiate positions,
-              and work toward resolutions through the procedures of formal debate.
+              Across three committees, delegates will represent nations and leaders, negotiate
+              positions, and work toward resolutions through the procedures of formal debate.
             </p>
           </div>
         </div>
@@ -354,20 +415,41 @@ function Details() {
   return (
     <section id="conference" className="surface-dark py-24 md:py-36">
       <Container>
-        <SectionHead index="II" label="The Conference" title={<>18 — 19<br /><em className="text-gold">November</em> 2026</>} dark />
+        <SectionHead
+          index="II"
+          label="The Conference"
+          title={
+            <>
+              18 — 19
+              <br />
+              <em className="text-gold">November</em> 2026
+            </>
+          }
+          dark
+        />
         <div className="grid gap-12 border-t border-line-dark pt-12 lg:grid-cols-12">
           <div className="reveal lg:col-span-5">
             <p className="eyebrow text-ivory/50">Venue</p>
             <p className="display mt-4 text-3xl md:text-4xl">{conference.venue.name}</p>
             {conference.venue.lines.map((l) => (
-              <p key={l} className="mt-2 text-ivory/70">{l}</p>
+              <p key={l} className="mt-2 text-ivory/70">
+                {l}
+              </p>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4 lg:col-span-7">
             {stats.map((s, i) => (
-              <div key={s.label} className="reveal border-l border-line-dark pl-4 md:pl-6" style={{ transitionDelay: `${i * 120}ms` }}>
-                <p className="display text-6xl text-gold md:text-8xl"><Counter to={s.n} /></p>
-                <p className="eyebrow mt-3 text-[0.6rem] text-ivory/60 md:text-[0.7rem]">{s.label}</p>
+              <div
+                key={s.label}
+                className="reveal border-l border-line-dark pl-4 md:pl-6"
+                style={{ transitionDelay: `${i * 120}ms` }}
+              >
+                <p className="display text-6xl text-gold md:text-8xl">
+                  <Counter to={s.n} />
+                </p>
+                <p className="eyebrow mt-3 text-[0.6rem] text-ivory/60 md:text-[0.7rem]">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>
@@ -383,7 +465,15 @@ function Committees() {
   return (
     <section id="committees" className="py-24 md:py-36">
       <Container>
-        <SectionHead index="III" label="Committees" title={<>Three <em className="text-gold">chambers</em></>} />
+        <SectionHead
+          index="III"
+          label="Committees"
+          title={
+            <>
+              Three <em className="text-gold">chambers</em>
+            </>
+          }
+        />
         <div className="grid border-t border-border md:grid-cols-3">
           {committees.map((c, i) => (
             <article
@@ -393,7 +483,9 @@ function Committees() {
             >
               <div className="flex items-baseline justify-between">
                 <span className="eyebrow text-gold">{c.index}</span>
-                <span className="eyebrow text-muted-foreground transition-colors group-hover:text-ivory/50">Committee</span>
+                <span className="eyebrow text-muted-foreground transition-colors group-hover:text-ivory/50">
+                  Committee
+                </span>
               </div>
               <h3 className="display mt-10 text-7xl transition-transform duration-700 group-hover:-translate-y-1 md:text-8xl">
                 {c.short}
@@ -421,15 +513,32 @@ function Agendas() {
   return (
     <section id="agendas" className="surface-dark py-24 md:py-36">
       <Container>
-        <SectionHead index="III·II" label="Agendas" title={<>The <em className="text-gold">agendas</em></>} dark />
+        <SectionHead
+          index="III·II"
+          label="Agendas"
+          title={
+            <>
+              The <em className="text-gold">agendas</em>
+            </>
+          }
+          dark
+        />
         <ol className="border-t border-line-dark">
           {committees.map((c, i) => (
-            <li key={c.short} className="reveal group grid gap-4 border-b border-line-dark py-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-12" style={{ transitionDelay: `${i * 100}ms` }}>
+            <li
+              key={c.short}
+              className="reveal group grid gap-4 border-b border-line-dark py-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-12"
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
               <div>
                 <span className="eyebrow text-gold">{c.index}</span>
-                <p className="display mt-3 text-5xl transition-colors duration-500 group-hover:text-gold md:text-6xl">{c.short}</p>
+                <p className="display mt-3 text-5xl transition-colors duration-500 group-hover:text-gold md:text-6xl">
+                  {c.short}
+                </p>
               </div>
-              <p className="display self-end text-2xl leading-snug text-ivory/90 sm:text-3xl md:text-4xl">{c.agenda ?? "To Be Announced"}</p>
+              <p className="display self-end text-2xl leading-snug text-ivory/90 sm:text-3xl md:text-4xl">
+                {c.agenda ?? "To Be Announced"}
+              </p>
             </li>
           ))}
         </ol>
@@ -444,7 +553,15 @@ function Days() {
   return (
     <section className="bg-secondary py-24 md:py-36">
       <Container>
-        <SectionHead index="IV" label="Two Days · Dress Code" title={<>The <em className="text-gold">two</em> days</>} />
+        <SectionHead
+          index="IV"
+          label="Two Days · Dress Code"
+          title={
+            <>
+              The <em className="text-gold">two</em> days
+            </>
+          }
+        />
         <div className="grid gap-16 md:grid-cols-2 md:gap-10">
           {days.map((d, i) => (
             <div key={d.index} className={`reveal ${i === 1 ? "md:mt-32" : ""}`}>
@@ -463,7 +580,9 @@ function Days() {
               </div>
               <div className="mt-8 flex items-end justify-between border-t border-border pt-6">
                 <div>
-                  <p className="eyebrow text-muted-foreground">Day {d.index} · {d.date}</p>
+                  <p className="eyebrow text-muted-foreground">
+                    Day {d.index} · {d.date}
+                  </p>
                   <p className="display mt-3 text-4xl md:text-5xl">{d.dress}</p>
                 </div>
                 <span className="eyebrow text-gold">Dress code</span>
@@ -500,7 +619,17 @@ function Register() {
               <p className="display mt-8 text-7xl text-gold md:text-8xl">{f.price}</p>
               <p className="eyebrow mt-6 text-gold">{f.earlyBird}</p>
               <p className="mt-4 min-h-12 text-ivory/70">{f.note}</p>
-              <Button asChild variant="bare" className="btn-gold mt-10 w-full"><a href={(f.id === "external" ? conference.externalRegistrationUrl : REG_URL) ?? REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button>
+              <Button asChild variant="bare" className="btn-gold mt-10 w-full">
+                <a
+                  href={
+                    (f.id === "external" ? conference.externalRegistrationUrl : REG_URL) ?? REG_URL
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Register Now <span aria-hidden>→</span>
+                </a>
+              </Button>
             </div>
           ))}
         </div>
@@ -512,25 +641,51 @@ function Register() {
           </div>
           <ul className="mt-8 space-y-4 md:mt-0">
             {schoolDelegation.points.map((pt) => (
-              <li key={pt} className="flex gap-3 text-ivory/70"><span className="text-gold" aria-hidden>—</span><span>{pt}</span></li>
+              <li key={pt} className="flex gap-3 text-ivory/70">
+                <span className="text-gold" aria-hidden>
+                  —
+                </span>
+                <span>{pt}</span>
+              </li>
             ))}
-            <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
+            <li className="pt-4">
+              <Button asChild variant="bare" className="btn-gold w-full sm:w-auto">
+                <a href={REG_URL} target="_blank" rel="noopener noreferrer">
+                  Register Now <span aria-hidden>→</span>
+                </a>
+              </Button>
+            </li>
           </ul>
         </div>
         <dl className="mx-auto mt-10 grid max-w-5xl border border-line-dark sm:grid-cols-2">
           {registrationDates.map((r, i) => (
-            <div key={r.label} className={`p-6 text-center ${i ? "border-t border-line-dark sm:border-l sm:border-t-0" : ""}`}>
+            <div
+              key={r.label}
+              className={`p-6 text-center ${i ? "border-t border-line-dark sm:border-l sm:border-t-0" : ""}`}
+            >
               <dt className="eyebrow text-ivory/60">{r.label}</dt>
               <dd className="display mt-3 text-3xl text-gold">{r.date}</dd>
             </div>
           ))}
         </dl>
         <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-ivory/75">
-          <span className="eyebrow mr-2 text-gold">{committeePolicy.title}</span>{committeePolicy.text}
+          <span className="eyebrow mr-2 text-gold">{committeePolicy.title}</span>
+          {committeePolicy.text}
         </p>
         <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
-          {feeNotes.map((n) => <p key={n}>{n}</p>)}
-          <p className="pt-3"><a href={conference.delegateMatrixUrl} target="_blank" rel="noopener noreferrer" className="eyebrow inline-flex items-center gap-2 border-b border-gold/60 pb-1 text-gold transition-colors hover:text-ivory">View Delegate Matrix <span aria-hidden>↗</span></a></p>
+          {feeNotes.map((n) => (
+            <p key={n}>{n}</p>
+          ))}
+          <p className="pt-3">
+            <a
+              href={conference.delegateMatrixUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="eyebrow inline-flex items-center gap-2 border-b border-gold/60 pb-1 text-gold transition-colors hover:text-ivory"
+            >
+              View Delegate Matrix <span aria-hidden>↗</span>
+            </a>
+          </p>
         </div>
       </Container>
     </section>
@@ -540,7 +695,11 @@ function Register() {
 /* ---------------- secretariat ---------------- */
 
 function Initials({ name }: { name: string }) {
-  const i = name.split(" ").map((p) => p[0]).slice(0, 2).join("");
+  const i = name
+    .split(" ")
+    .map((p) => p[0])
+    .slice(0, 2)
+    .join("");
   return <span className="display text-7xl text-gold/80">{i}</span>;
 }
 
@@ -601,9 +760,14 @@ function SecretariatCard({
       </button>
       <figcaption className="mx-auto mt-3 min-w-0 max-w-[15rem] border-t border-border pt-3 sm:mt-6 sm:pt-5 min-[340px]:max-w-none">
         <p className="display break-words text-xl leading-tight sm:text-3xl">{p.name}</p>
-        <p className="eyebrow mt-2 break-words text-[0.6rem] leading-snug text-muted-foreground sm:text-xs">{p.role}</p>
+        <p className="eyebrow mt-2 break-words text-[0.6rem] leading-snug text-muted-foreground sm:text-xs">
+          {p.role}
+        </p>
         {p.phone && (
-          <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 sm:mt-3 sm:gap-2 sm:text-sm transition-colors hover:text-gold">
+          <a
+            href={`tel:${p.phone.replace(/\s/g, "")}`}
+            className="mt-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 sm:mt-3 sm:gap-2 sm:text-sm transition-colors hover:text-gold"
+          >
             <Phone size={14} className="shrink-0 text-gold" /> {p.phone}
           </a>
         )}
@@ -619,25 +783,38 @@ function SocialsStrip() {
       className="reveal surface-dark group/soc relative isolate mt-24 overflow-hidden border border-gold/25 px-6 py-14 sm:px-10 md:mt-32 md:px-16 md:py-24"
     >
       <div aria-hidden="true" className="socials-glow pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-3 -z-10 border border-line-dark transition-colors duration-700 group-hover/soc:border-gold/30 md:inset-5" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-3 -z-10 border border-line-dark transition-colors duration-700 group-hover/soc:border-gold/30 md:inset-5"
+      />
       <div className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-end md:gap-16">
         <div>
           <div className="flex items-center gap-4">
             <span className="h-px w-10 bg-gold transition-all duration-700 group-hover/soc:w-16" />
             <p className="eyebrow text-gold">Music · Dance · Connection</p>
           </div>
-          <h3 id="socials-title" className="display mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+          <h3
+            id="socials-title"
+            className="display mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-9xl"
+          >
             Aurelius
             <em className="block text-gold">Socials</em>
           </h3>
         </div>
         <div>
           <p className="text-base leading-relaxed text-ivory/75 md:text-lg">
-            “Beyond debate, discover the other side of Aurelius. Aurelius Socials brings delegates together through music, dance, and shared experiences, creating the perfect space to meet new people, make connections, and enjoy the conference beyond committee rooms.”
+            “Beyond debate, discover the other side of Aurelius. Aurelius Socials brings delegates
+            together through music, dance, and shared experiences, creating the perfect space to
+            meet new people, make connections, and enjoy the conference beyond committee rooms.”
           </p>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-line-dark pt-6">
             {["Music", "Dance", "New Connections"].map((t) => (
-              <li key={t} className="eyebrow text-ivory/60 transition-colors duration-500 hover:text-gold">{t}</li>
+              <li
+                key={t}
+                className="eyebrow text-ivory/60 transition-colors duration-500 hover:text-gold"
+              >
+                {t}
+              </li>
             ))}
           </ul>
         </div>
@@ -687,14 +864,46 @@ function Secretariat() {
   return (
     <section id="secretariat" className="py-24 md:py-36">
       <Container>
-        <SectionHead index="VI" label="First Edition" title={<>Message from the <em className="text-gold">Secretariat</em></>} />
+        <SectionHead
+          index="VI"
+          label="First Edition"
+          title={
+            <>
+              Message from the <em className="text-gold">Secretariat</em>
+            </>
+          }
+        />
         <div className="reveal mb-16 grid gap-8 border-t border-border pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
           <p className="eyebrow text-gold">A new beginning</p>
           <div className="max-w-3xl">
-            <p className="display text-3xl leading-[1.15] sm:text-4xl md:text-5xl">“Every great legacy begins with a single, daring spark, turning ordinary moments into gold.</p>
-            <p className="mt-7 text-base leading-relaxed text-muted-foreground">As we step into the inaugural edition of <strong className="text-foreground">Aurelius MUN</strong>, we aren’t just launching a conference—we are breathing life into a shared vision and setting the cornerstone for a remarkable tradition. This very first edition means everything to us. It represents the courage to start from scratch, the boldness to dream without limits, and the unwavering belief that young minds hold the power to shape a better tomorrow.</p>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">The name <strong className="text-foreground">Aurelius</strong>—derived from the Latin word meaning <em>golden</em> or <em>gilded</em>—carries a profound legacy of wisdom, resilience, and quiet strength. Just like the name implies, we believe that true brilliance isn't just about eloquence; it is forged through thoughtful debate, empathy, and the pursuit of truth under pressure. This name reflects the kind of leaders we strive to cultivate: grounded yet radiant, resilient in the face of complex global challenges, and deeply committed to uplifting one another.</p>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">To every single delegate, advisor, and team member joining us on this journey: you are not just attending an event. You are writing page one of our golden story. Let this month remind you that every global change starts with a local voice willing to speak up. Let’s embrace the challenge, inspire one another, and make our debut truly legendary!”</p>
+            <p className="display text-3xl leading-[1.15] sm:text-4xl md:text-5xl">
+              “Every great legacy begins with a single, daring spark, turning ordinary moments into
+              gold.
+            </p>
+            <p className="mt-7 text-base leading-relaxed text-muted-foreground">
+              As we step into the inaugural edition of{" "}
+              <strong className="text-foreground">Aurelius MUN</strong>, we aren’t just launching a
+              conference—we are breathing life into a shared vision and setting the cornerstone for
+              a remarkable tradition. This very first edition means everything to us. It represents
+              the courage to start from scratch, the boldness to dream without limits, and the
+              unwavering belief that young minds hold the power to shape a better tomorrow.
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              The name <strong className="text-foreground">Aurelius</strong>—derived from the Latin
+              word meaning <em>golden</em> or <em>gilded</em>—carries a profound legacy of wisdom,
+              resilience, and quiet strength. Just like the name implies, we believe that true
+              brilliance isn't just about eloquence; it is forged through thoughtful debate,
+              empathy, and the pursuit of truth under pressure. This name reflects the kind of
+              leaders we strive to cultivate: grounded yet radiant, resilient in the face of complex
+              global challenges, and deeply committed to uplifting one another.
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              To every single delegate, advisor, and team member joining us on this journey: you are
+              not just attending an event. You are writing page one of our golden story. Let this
+              month remind you that every global change starts with a local voice willing to speak
+              up. Let’s embrace the challenge, inspire one another, and make our debut truly
+              legendary!”
+            </p>
           </div>
         </div>
         <SecretariatGrid />
@@ -710,13 +919,25 @@ function ExecutiveBoard() {
   return (
     <section className="border-t border-border bg-secondary py-24 md:py-32">
       <Container>
-        <SectionHead index="VII" label="Executive Board" title={<>Executive <em className="text-gold">Board</em></>} />
+        <SectionHead
+          index="VII"
+          label="Executive Board"
+          title={
+            <>
+              Executive <em className="text-gold">Board</em>
+            </>
+          }
+        />
         {executiveBoard.length > 0 ? (
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {executiveBoard.map((m) => (
               <div key={m.name} className="reveal">
                 <div className="surface-dark grid aspect-[4/5] place-items-center">
-                  {m.photo ? <img src={m.photo} alt={m.name} className="h-full w-full object-cover" /> : <Initials name={m.name} />}
+                  {m.photo ? (
+                    <img src={m.photo} alt={m.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <Initials name={m.name} />
+                  )}
                 </div>
                 <p className="eyebrow mt-5 text-gold">{m.committee}</p>
                 <p className="display mt-2 text-2xl">{m.name}</p>
@@ -727,7 +948,10 @@ function ExecutiveBoard() {
         ) : (
           <div className="grid border-t border-border md:grid-cols-3">
             {committees.map((c) => (
-              <div key={c.short} className="reveal border-b border-border py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0">
+              <div
+                key={c.short}
+                className="reveal border-b border-border py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"
+              >
                 <p className="eyebrow text-gold">{c.short}</p>
                 <p className="display mt-4 text-3xl text-muted-foreground">To Be Announced</p>
               </div>
@@ -763,10 +987,14 @@ function Schedule() {
                   <li
                     key={i}
                     className={`flex flex-col gap-1 border-b py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:py-5 ${
-                      it.highlight ? "border-gold/30 bg-gradient-to-r from-gold/[0.07] to-transparent" : "border-border"
+                      it.highlight
+                        ? "border-gold/30 bg-gradient-to-r from-gold/[0.07] to-transparent"
+                        : "border-border"
                     }`}
                   >
-                    <span className={`display text-2xl [font-variant-numeric:lining-nums] md:text-3xl ${it.highlight ? "text-gold" : ""}`}>
+                    <span
+                      className={`display text-2xl [font-variant-numeric:lining-nums] md:text-3xl ${it.highlight ? "text-gold" : ""}`}
+                    >
                       {it.title}
                     </span>
                     {it.time && (
@@ -810,12 +1038,16 @@ function Faq() {
                   className="flex w-full items-center justify-between gap-6 py-6 text-left"
                 >
                   <span className="display text-2xl md:text-3xl">{f.q}</span>
-                  <span className={`relative h-4 w-4 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`}>
+                  <span
+                    className={`relative h-4 w-4 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`}
+                  >
                     <span className="absolute left-0 top-1/2 h-px w-4 bg-gold" />
                     <span className="absolute left-1/2 top-0 h-4 w-px bg-gold" />
                   </span>
                 </button>
-                <div className={`grid transition-all duration-500 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                <div
+                  className={`grid transition-all duration-500 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                >
                   <div className="overflow-hidden">
                     <p className="max-w-2xl pb-8 text-ivory/70">{f.a}</p>
                   </div>
@@ -834,30 +1066,78 @@ function Faq() {
 function Contact() {
   const c = conference.contact;
   const rows = [
-    { label: "Official email", value: c.email, href: c.email ? `mailto:${c.email}` : null, external: false },
-    { label: "Instagram", value: c.instagram ? "@aureliusjmcmun" : null, href: c.instagram, external: true },
-    { label: "Phone", value: c.phone, href: c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : null, external: false },
-    { label: "Teacher In-Charge · Additional", value: c.teacherPhone, href: c.teacherPhone ? `tel:${c.teacherPhone.replace(/\s/g, "")}` : null, external: false },
-    { label: "Location", value: "Open in Google Maps", href: conference.venue.mapsUrl, external: true },
+    {
+      label: "Official email",
+      value: c.email,
+      href: c.email ? `mailto:${c.email}` : null,
+      external: false,
+    },
+    {
+      label: "Instagram",
+      value: c.instagram ? "@aureliusjmcmun" : null,
+      href: c.instagram,
+      external: true,
+    },
+    {
+      label: "Phone",
+      value: c.phone,
+      href: c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : null,
+      external: false,
+    },
+    {
+      label: "Teacher In-Charge · Additional",
+      value: c.teacherPhone,
+      href: c.teacherPhone ? `tel:${c.teacherPhone.replace(/\s/g, "")}` : null,
+      external: false,
+    },
+    {
+      label: "Location",
+      value: "Open in Google Maps",
+      href: conference.venue.mapsUrl,
+      external: true,
+    },
   ];
   return (
     <section id="contact" className="py-24 md:py-36">
       <Container>
-        <SectionHead index="X" label="Contact" title={<>Find <em className="text-gold">us</em></>} />
+        <SectionHead
+          index="X"
+          label="Contact"
+          title={
+            <>
+              Find <em className="text-gold">us</em>
+            </>
+          }
+        />
         <div className="grid gap-12 lg:grid-cols-2">
           <div className="reveal">
             <p className="eyebrow text-muted-foreground">Venue</p>
             <p className="display mt-4 text-4xl">{conference.venue.name}</p>
             {conference.venue.lines.map((l) => (
-              <p key={l} className="mt-1 text-muted-foreground">{l}</p>
+              <p key={l} className="mt-1 text-muted-foreground">
+                {l}
+              </p>
             ))}
             <dl className="mt-12 border-t border-border">
               {rows.map((r) => (
-                <div key={r.label} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
+                <div
+                  key={r.label}
+                  className="flex items-baseline justify-between gap-6 border-b border-border py-5"
+                >
                   <dt className="eyebrow text-muted-foreground">{r.label}</dt>
                   <dd className="break-all text-right">
                     {r.value ? (
-                      r.href ? <a href={r.href} className="link-underline" {...(r.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{r.value}</a> : r.value
+                      r.href ? (
+                        <a
+                          href={r.href}
+                          className="link-underline"
+                          {...(r.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        >
+                          {r.value}
+                        </a>
+                      ) : (
+                        r.value
+                      )
                     ) : (
                       <span className="eyebrow text-gold">To Be Announced</span>
                     )}
@@ -868,14 +1148,33 @@ function Contact() {
           </div>
           <div className="reveal surface-dark relative aspect-[4/3] overflow-hidden lg:aspect-auto">
             {conference.venue.mapEmbedUrl ? (
-              <iframe title="Venue map" src={conference.venue.mapEmbedUrl} loading="lazy" className="h-full w-full border-0" />
+              <iframe
+                title="Venue map"
+                src={conference.venue.mapEmbedUrl}
+                loading="lazy"
+                className="h-full w-full border-0"
+              />
             ) : (
               <>
-                <img src={heroGlobe} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover opacity-40" />
+                <img
+                  src={heroGlobe}
+                  alt=""
+                  loading="lazy"
+                  width={1920}
+                  height={1088}
+                  className="absolute inset-0 h-full w-full object-cover opacity-40"
+                />
                 <div className="relative flex h-full flex-col items-center justify-center p-8 text-center">
                   <span className="mb-6 block h-3 w-3 rounded-full bg-gold ring-8 ring-gold/20" />
                   <p className="display text-3xl">Greater Noida</p>
-                  <a href={conference.venue.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-6">View on Google Maps</a>
+                  <a
+                    href={conference.venue.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ghost mt-6"
+                  >
+                    View on Google Maps
+                  </a>
                 </div>
               </>
             )}
@@ -898,30 +1197,89 @@ function Footer() {
               Aurelius <em className="text-gold">MUN</em> 2026
             </p>
             <p className="eyebrow mt-6 text-ivory/60">{conference.dates}</p>
-            <p className="eyebrow mt-2 text-ivory/60">{conference.venue.name} · {conference.venue.city}</p>
+            <p className="eyebrow mt-2 text-ivory/60">
+              {conference.venue.name} · {conference.venue.city}
+            </p>
           </div>
           <div className="md:col-span-3">
             <p className="eyebrow text-gold">Navigate</p>
             <ul className="mt-5 space-y-3">
               {navLinks.map((l) => (
-                <li key={l.href}><a href={l.href} className="link-underline text-ivory/70 hover:text-ivory">{l.label}</a></li>
+                <li key={l.href}>
+                  <a href={l.href} className="link-underline text-ivory/70 hover:text-ivory">
+                    {l.label}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
           <div className="md:col-span-3">
             <p className="eyebrow text-gold">Connect</p>
             <ul className="mt-5 space-y-3 text-ivory/70">
-              <li>Instagram — {conference.contact.instagram ? <a className="link-underline" href={conference.contact.instagram} target="_blank" rel="noopener noreferrer">Follow</a> : "TBA"}</li>
-              <li>Email — {conference.contact.email ? <a className="link-underline" href={`mailto:${conference.contact.email}`}>{conference.contact.email}</a> : "TBA"}</li>
-              <li>Phone — {conference.contact.phone ? <a className="link-underline" href={`tel:${conference.contact.phone.replace(/\s/g, "")}`}>{conference.contact.phone}</a> : "TBA"}</li>
-              <li>Teacher In-Charge · Additional — {conference.contact.teacherPhone ? <a className="link-underline" href={`tel:${conference.contact.teacherPhone.replace(/\s/g, "")}`}>{conference.contact.teacherPhone}</a> : "TBA"}</li>
+              <li>
+                Instagram —{" "}
+                {conference.contact.instagram ? (
+                  <a
+                    className="link-underline"
+                    href={conference.contact.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Follow
+                  </a>
+                ) : (
+                  "TBA"
+                )}
+              </li>
+              <li>
+                Email —{" "}
+                {conference.contact.email ? (
+                  <a className="link-underline" href={`mailto:${conference.contact.email}`}>
+                    {conference.contact.email}
+                  </a>
+                ) : (
+                  "TBA"
+                )}
+              </li>
+              <li>
+                Phone —{" "}
+                {conference.contact.phone ? (
+                  <a
+                    className="link-underline"
+                    href={`tel:${conference.contact.phone.replace(/\s/g, "")}`}
+                  >
+                    {conference.contact.phone}
+                  </a>
+                ) : (
+                  "TBA"
+                )}
+              </li>
+              <li>
+                Teacher In-Charge · Additional —{" "}
+                {conference.contact.teacherPhone ? (
+                  <a
+                    className="link-underline"
+                    href={`tel:${conference.contact.teacherPhone.replace(/\s/g, "")}`}
+                  >
+                    {conference.contact.teacherPhone}
+                  </a>
+                ) : (
+                  "TBA"
+                )}
+              </li>
             </ul>
-            <Button asChild variant="bare" className="btn-gold mt-8"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
+            <Button asChild variant="bare" className="btn-gold mt-8">
+              <a href={REG_URL} target="_blank" rel="noopener noreferrer">
+                Register Now
+              </a>
+            </Button>
           </div>
         </div>
         <div className="flex flex-col justify-between gap-2 py-8 text-xs text-ivory/40 sm:flex-row">
           <span>© 2026 Aurelius MUN</span>
-          <a href="#home" className="link-underline">Back to top ↑</a>
+          <a href="#home" className="link-underline">
+            Back to top ↑
+          </a>
         </div>
       </Container>
     </footer>
