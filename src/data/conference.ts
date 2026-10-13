@@ -171,8 +171,9 @@ export const schedule: { day: string; dress: string | null; items: { time: strin
       { title: "Session 4", time: "10:45 AM – 12:15 PM" },
       { title: "Lunch", time: "12:15 PM – 1:00 PM" },
       { title: "Session 5", time: "1:00 PM – 3:30 PM" },
-      { title: "High Tea", time: "3:30 PM – 4:00 PM" },
-      { title: "Aurelius Socials", time: "4:00 PM – 5:00 PM", highlight: true },
+      { title: "Closing Ceremony and Award Distribution", time: "3:30 PM – 4:15 PM" },
+      { title: "High Tea", time: "4:15 PM – 4:45 PM" },
+      { title: "Aurelius Socials", time: "4:45 PM – 5:30 PM", highlight: true },
     ],
   },
 ];
