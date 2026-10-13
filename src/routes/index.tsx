@@ -12,6 +12,8 @@ import {
   fees,
   schoolDelegation,
   feeNotes,
+  registrationDates,
+  committeePolicy,
   committees,
   days,
   secretariat,
@@ -43,7 +45,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const dayImages = [dayTraditional, dayWestern];
+const dayImages = [dayWestern, dayTraditional];
 
 function Index() {
   useRevealAll();
@@ -515,6 +517,17 @@ function Register() {
             <li className="pt-4"><Button asChild variant="bare" className="btn-gold w-full sm:w-auto"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now <span aria-hidden>→</span></a></Button></li>
           </ul>
         </div>
+        <dl className="mx-auto mt-10 grid max-w-5xl border border-line-dark sm:grid-cols-2">
+          {registrationDates.map((r, i) => (
+            <div key={r.label} className={`p-6 text-center ${i ? "border-t border-line-dark sm:border-l sm:border-t-0" : ""}`}>
+              <dt className="eyebrow text-ivory/60">{r.label}</dt>
+              <dd className="display mt-3 text-3xl text-gold">{r.date}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-ivory/75">
+          <span className="eyebrow mr-2 text-gold">{committeePolicy.title}</span>{committeePolicy.text}
+        </p>
         <div className="mx-auto mt-6 max-w-5xl space-y-1 text-center text-xs text-ivory/50">
           {feeNotes.map((n) => <p key={n}>{n}</p>)}
           <p className="pt-3"><a href={conference.delegateMatrixUrl} target="_blank" rel="noopener noreferrer" className="eyebrow inline-flex items-center gap-2 border-b border-gold/60 pb-1 text-gold transition-colors hover:text-ivory">View Delegate Matrix <span aria-hidden>↗</span></a></p>
@@ -638,7 +651,7 @@ function SecretariatGrid() {
   const canHover = useCanHover();
   const gridRef = useRef<HTMLDivElement>(null);
 
-  // Tapping (or clicking) outside the image group resets every portrait to colour.
+  // Tapping (or clicking) outside the image group resets every portrait to grayscale.
   useEffect(() => {
     if (active === null) return;
     const onDocPointer = (e: PointerEvent) => {
@@ -660,7 +673,7 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={canHover ? active !== null && active !== i : active !== i}
+          dimmed={active !== i}
           canHover={canHover}
           onHover={() => setActive(i)}
           onToggle={() => setActive((cur) => (cur === i ? null : i))}
