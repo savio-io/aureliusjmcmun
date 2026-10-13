@@ -547,7 +547,7 @@ function Initials({ name }: { name: string }) {
 function useCanHover() {
   const [can, setCan] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(hover: hover)");
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
     const sync = () => setCan(mq.matches);
     sync();
     mq.addEventListener("change", sync);
