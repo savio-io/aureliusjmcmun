@@ -579,7 +579,7 @@ function SecretariatCard({
         type="button"
         aria-pressed={active}
         aria-label={`Emphasise ${p.name}'s photograph`}
-        onClick={canHover ? undefined : onToggle}
+        onClick={undefined}
         onMouseEnter={canHover ? onHover : undefined}
         onFocus={(e) => {
           if ((e.target as HTMLElement).matches(":focus-visible")) onHover();
@@ -673,7 +673,7 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={active !== i}
+          dimmed={canHover && active !== null && active !== i}
           canHover={canHover}
           onHover={() => setActive(i)}
           onToggle={() => setActive((cur) => (cur === i ? null : i))}
