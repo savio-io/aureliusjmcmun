@@ -56,7 +56,6 @@ function Index() {
       <About />
       <Details />
       <Committees />
-      <Agendas />
       <Days />
       <Register />
       <Secretariat />
@@ -415,28 +414,6 @@ function Committees() {
   );
 }
 
-/* ---------------- agendas ---------------- */
-
-function Agendas() {
-  return (
-    <section id="agendas" className="surface-dark py-24 md:py-36">
-      <Container>
-        <SectionHead index="III·II" label="Agendas" title={<>The <em className="text-gold">agendas</em></>} dark />
-        <ol className="border-t border-line-dark">
-          {committees.map((c, i) => (
-            <li key={c.short} className="reveal group grid gap-4 border-b border-line-dark py-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-12" style={{ transitionDelay: `${i * 100}ms` }}>
-              <div>
-                <span className="eyebrow text-gold">{c.index}</span>
-                <p className="display mt-3 text-5xl transition-colors duration-500 group-hover:text-gold md:text-6xl">{c.short}</p>
-              </div>
-              <p className="display self-end text-2xl leading-snug text-ivory/90 sm:text-3xl md:text-4xl">{c.agenda ?? "To Be Announced"}</p>
-            </li>
-          ))}
-        </ol>
-      </Container>
-    </section>
-  );
-}
 
 /* ---------------- days ---------------- */
 
