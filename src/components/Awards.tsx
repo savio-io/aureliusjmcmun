@@ -20,7 +20,9 @@ export function Awards() {
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <span className="eyebrow text-gold">0{i + 1}</span>
-              <span className={`display transition-colors duration-500 group-hover:text-gold ${i === 0 ? "text-5xl md:text-6xl" : i < 3 ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"}`}>
+              <span
+                className={`display transition-colors duration-500 group-hover:text-gold ${i === 0 ? "text-5xl md:text-6xl" : i < 3 ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"}`}
+              >
                 {a.title}
               </span>
               <span className="text-sm text-ivory/60">{a.count}</span>
