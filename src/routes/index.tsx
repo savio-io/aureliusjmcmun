@@ -556,7 +556,7 @@ function SecretariatCard({
         type="button"
         aria-pressed={active}
         aria-label={`Emphasise ${p.name}'s photograph`}
-        onClick={undefined}
+        onClick={canHover ? undefined : onToggle}
         onMouseEnter={canHover ? onHover : undefined}
         onFocus={(e) => {
           if ((e.target as HTMLElement).matches(":focus-visible")) onHover();
@@ -627,16 +627,18 @@ function SecretariatGrid() {
   const [active, setActive] = useState<number | null>(null);
   const canHover = useCanHover();
   const gridRef = useRef<HTMLDivElement>(null);
+  // Touch devices: photos start grayscale; each tapped photo turns (and stays) colour.
+  const [tapped, setTapped] = useState<Set<number>>(() => new Set());
 
   // Tapping (or clicking) outside the image group resets every portrait to grayscale.
   useEffect(() => {
-    if (active === null) return;
+    if (active === null || !canHover) return;
     const onDocPointer = (e: PointerEvent) => {
       if (!gridRef.current?.contains(e.target as Node)) setActive(null);
     };
     document.addEventListener("pointerdown", onDocPointer);
     return () => document.removeEventListener("pointerdown", onDocPointer);
-  }, [active]);
+  }, [active, canHover]);
 
   return (
     <div
@@ -650,10 +652,10 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={canHover && active !== null && active !== i}
+          dimmed={canHover ? active !== null && active !== i : !tapped.has(i)}
           canHover={canHover}
           onHover={() => setActive(i)}
-          onToggle={() => setActive((cur) => (cur === i ? null : i))}
+          onToggle={() => setTapped((cur) => new Set(cur).add(i))}
         />
       ))}
     </div>
