@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const dayImages = [dayWestern, dayTraditional];
+const dayImages = [dayTraditional, dayWestern];
 
 function Index() {
   useRevealAll();
