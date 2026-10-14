@@ -522,7 +522,7 @@ function Initials({ name }: { name: string }) {
 }
 
 function useCanHover() {
-  const [can, setCan] = useState(false);
+  const [can, setCan] = useState<boolean | null>(null);
   useEffect(() => {
     const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
     const sync = () => setCan(mq.matches);
@@ -652,8 +652,8 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={canHover ? active !== null && active !== i : !tapped.has(i)}
-          canHover={canHover}
+          dimmed={canHover === null ? false : canHover ? active !== null && active !== i : !tapped.has(i)}
+          canHover={!!canHover}
           onHover={() => setActive(i)}
           onToggle={() => setTapped((cur) => new Set(cur).add(i))}
         />
