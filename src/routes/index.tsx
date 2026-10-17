@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Phone } from "lucide-react";
+import { Instagram, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
 import logo from "@/assets/aurelius-hero-logo.jpg";
@@ -584,6 +584,17 @@ function SecretariatCard({
             <Phone size={14} className="shrink-0 text-gold" /> {p.phone}
           </a>
         )}
+        {p.instagram && (
+          <a
+            href={p.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${p.name}'s Instagram`}
+            className="mt-2 inline-flex min-h-11 items-center text-foreground/80 transition-colors hover:text-gold sm:mt-3"
+          >
+            <Instagram size={16} className="text-gold" aria-hidden="true" />
+          </a>
+        )}
       </figcaption>
     </figure>
   );
@@ -627,8 +638,28 @@ function SecretariatGrid() {
   const [active, setActive] = useState<number | null>(null);
   const canHover = useCanHover();
   const gridRef = useRef<HTMLDivElement>(null);
-  // Touch devices: photos start grayscale; each tapped photo turns (and stays) colour.
-  const [tapped, setTapped] = useState<Set<number>>(() => new Set());
+  // Touch devices: photos start grayscale; a tapped photo turns colour for ~2s after the last tap.
+  const [touchActive, setTouchActive] = useState<number | null>(null);
+  const touchTimer = useRef<number | null>(null);
+
+  const clearTouchTimer = () => {
+    if (touchTimer.current !== null) {
+      window.clearTimeout(touchTimer.current);
+      touchTimer.current = null;
+    }
+  };
+
+  const tapPhoto = (i: number) => {
+    clearTouchTimer();
+    setTouchActive(i);
+    touchTimer.current = window.setTimeout(() => {
+      setTouchActive(null);
+      touchTimer.current = null;
+    }, 2000);
+  };
+
+  // Clean up the timer if the gallery unmounts so no photo stays coloured.
+  useEffect(() => clearTouchTimer, []);
 
   // Tapping (or clicking) outside the image group resets every portrait to grayscale.
   useEffect(() => {
@@ -652,10 +683,10 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={canHover === null ? false : canHover ? active !== null && active !== i : !tapped.has(i)}
+          dimmed={canHover === null ? false : canHover ? active !== null && active !== i : touchActive !== i}
           canHover={!!canHover}
           onHover={() => setActive(i)}
-          onToggle={() => setTapped((cur) => new Set(cur).add(i))}
+          onToggle={() => tapPhoto(i)}
         />
       ))}
     </div>
