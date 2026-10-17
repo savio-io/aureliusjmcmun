@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Phone } from "lucide-react";
+import { Instagram, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroGlobe from "@/assets/hero-globe.jpg";
 import logo from "@/assets/aurelius-hero-logo.jpg";
@@ -638,8 +638,28 @@ function SecretariatGrid() {
   const [active, setActive] = useState<number | null>(null);
   const canHover = useCanHover();
   const gridRef = useRef<HTMLDivElement>(null);
-  // Touch devices: photos start grayscale; each tapped photo turns (and stays) colour.
-  const [tapped, setTapped] = useState<Set<number>>(() => new Set());
+  // Touch devices: photos start grayscale; a tapped photo turns colour for ~2s after the last tap.
+  const [touchActive, setTouchActive] = useState<number | null>(null);
+  const touchTimer = useRef<number | null>(null);
+
+  const clearTouchTimer = () => {
+    if (touchTimer.current !== null) {
+      window.clearTimeout(touchTimer.current);
+      touchTimer.current = null;
+    }
+  };
+
+  const tapPhoto = (i: number) => {
+    clearTouchTimer();
+    setTouchActive(i);
+    touchTimer.current = window.setTimeout(() => {
+      setTouchActive(null);
+      touchTimer.current = null;
+    }, 2000);
+  };
+
+  // Clean up the timer if the gallery unmounts so no photo stays coloured.
+  useEffect(() => clearTouchTimer, []);
 
   // Tapping (or clicking) outside the image group resets every portrait to grayscale.
   useEffect(() => {
