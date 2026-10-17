@@ -533,7 +533,14 @@ function useCanHover() {
   return can;
 }
 
+/** "@handle" read straight from an Instagram profile URL. */
+function instagramHandle(url: string) {
+  const match = url.match(/instagram\.com\/([^/?#]+)/i);
+  return match ? `@${match[1]}` : null;
+}
+
 function SecretariatCard({
+
   p,
   i,
   active,
@@ -579,22 +586,29 @@ function SecretariatCard({
       <figcaption className="mx-auto mt-3 min-w-0 max-w-[15rem] border-t border-border pt-3 sm:mt-6 sm:pt-5 min-[340px]:max-w-none">
         <p className="display break-words text-xl leading-tight sm:text-3xl">{p.name}</p>
         <p className="eyebrow mt-2 break-words text-[0.6rem] leading-snug text-muted-foreground sm:text-xs">{p.role}</p>
-        {p.phone && (
-          <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 sm:mt-3 sm:gap-2 sm:text-sm transition-colors hover:text-gold">
-            <Phone size={14} className="shrink-0 text-gold" /> {p.phone}
-          </a>
+        {(p.phone || p.instagram) && (
+          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 sm:mt-3">
+            {p.phone && (
+              <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 transition-colors hover:text-gold sm:gap-2 sm:text-sm">
+                <Phone size={14} className="shrink-0 text-gold" />
+                {p.phone}
+              </a>
+            )}
+            {p.instagram && instagramHandle(p.instagram) && (
+              <a
+                href={p.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${p.name}'s Instagram: ${instagramHandle(p.instagram)}`}
+                className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 transition-colors hover:text-gold sm:gap-2 sm:text-sm"
+              >
+                <Instagram size={14} className="shrink-0 text-gold" aria-hidden="true" />
+                {instagramHandle(p.instagram)}
+              </a>
+            )}
+          </div>
         )}
-        {p.instagram && (
-          <a
-            href={p.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${p.name}'s Instagram`}
-            className="mt-2 inline-flex min-h-11 items-center text-foreground/80 transition-colors hover:text-gold sm:mt-3"
-          >
-            <Instagram size={16} className="text-gold" aria-hidden="true" />
-          </a>
-        )}
+
       </figcaption>
     </figure>
   );
