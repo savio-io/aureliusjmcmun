@@ -683,10 +683,10 @@ function SecretariatGrid() {
           p={p}
           i={i}
           active={active === i}
-          dimmed={canHover === null ? false : canHover ? active !== null && active !== i : !tapped.has(i)}
+          dimmed={canHover === null ? false : canHover ? active !== null && active !== i : touchActive !== i}
           canHover={!!canHover}
           onHover={() => setActive(i)}
-          onToggle={() => setTapped((cur) => new Set(cur).add(i))}
+          onToggle={() => tapPhoto(i)}
         />
       ))}
     </div>
