@@ -584,6 +584,17 @@ function SecretariatCard({
             <Phone size={14} className="shrink-0 text-gold" /> {p.phone}
           </a>
         )}
+        {p.instagram && (
+          <a
+            href={p.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${p.name}'s Instagram`}
+            className="mt-2 inline-flex min-h-11 items-center text-foreground/80 transition-colors hover:text-gold sm:mt-3"
+          >
+            <Instagram size={16} className="text-gold" aria-hidden="true" />
+          </a>
+        )}
       </figcaption>
     </figure>
   );
