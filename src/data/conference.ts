@@ -142,7 +142,7 @@ export const secretariat: Person[] = [
   { name: "Aradhya Shakya", role: "Deputy Director General", photo: aradhyaPhoto, focus: "50% 25%", phone: "+91 98377 43436", instagram: "https://www.instagram.com/aradhya._.shakya/" },
   { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto, focus: "48% 30%", phone: "+91 70657 74620", instagram: "https://www.instagram.com/wzz_.somyaahh/" },
   { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto, focus: "50% 75%", phone: "+91 94569 19571", instagram: "https://www.instagram.com/_d.dishika._/" },
-  { name: "Mr. Vishal", role: "Teacher-in-Charge", photo: "/mr-vishal.png", focus: "50% 30%", phone: "+91 70115 43292", instagram: null },
+  { name: "Mr. Vishal", role: "Teacher-in-Charge", photo: "/mr-vishal.png", focus: "50% 30%", phone: "+91 70115 43292", instagram: "https://www.instagram.com/vishalsingh_07_11/" },
 ];
 
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
