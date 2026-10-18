@@ -132,7 +132,7 @@ function Nav() {
           <span className="display text-2xl tracking-[0.12em]">AURELIUS</span>
           <span className="eyebrow text-gold">MUN</span>
         </a>
-        <nav className="hidden items-center gap-4 xl:gap-5 lg:flex">
+        <nav className="hidden items-center gap-4 lg:ml-auto lg:mr-10 lg:flex xl:gap-5 xl:mr-14">
           {topBarLinks.map((l) => (
             <a key={l.href} href={l.href} className="eyebrow link-underline text-[0.62rem] tracking-[0.22em] text-ivory/75 hover:text-ivory">
               {l.label}
