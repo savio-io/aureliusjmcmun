@@ -27,7 +27,8 @@ export const conference = {
   registrationUrl: "https://forms.gle/9fzqvfCjLzcbPB68A" as string | null,
   /** External delegation registration form — must differ from the internal one. */
   externalRegistrationUrl: "https://forms.gle/9fzqvfCjLzcbPB68A" as string | null,
-  delegateMatrixUrl: "https://docs.google.com/spreadsheets/d/1P31OodkUGvIXAeLv4JcECTeyZLyuD8zvDkso1D9GmWI/edit?usp=sharing",
+  delegateMatrixUrl:
+    "https://docs.google.com/spreadsheets/d/1P31OodkUGvIXAeLv4JcECTeyZLyuD8zvDkso1D9GmWI/edit?usp=sharing",
   contact: {
     email: "aureliusjmcmun@gmail.com" as string | null,
     instagram: "https://www.instagram.com/aureliusjmcmun/" as string | null,
@@ -74,7 +75,10 @@ export const committeePolicy = {
   text: "Any committee with fewer than 15 delegates will be dissolved one week before the conference.",
 };
 
-export const feeNotes = ["Fees are non-negotiable.", "No refunds will be provided once registration is confirmed."];
+export const feeNotes = [
+  "Fees are non-negotiable.",
+  "No refunds will be provided once registration is confirmed.",
+];
 
 export const schoolAward = {
   title: "Best School Delegation",
@@ -116,8 +120,7 @@ export const committees: Committee[] = [
     name: "All India Political Parties Meet",
     description:
       "A simulation of Indian national politics, where delegates represent political leaders and debate issues of national importance.",
-    agenda:
-      "Deliberation on India’s Response to Cross-Border Terrorism and Regional Security",
+    agenda: "Deliberation on India’s Response to Cross-Border Terrorism and Regional Security",
   },
 ];
 
@@ -137,18 +140,69 @@ export type Person = {
 };
 
 export const secretariat: Person[] = [
-  { name: "Savio Jose", role: "Founder & Director General", photo: savioPhoto, focus: "50% 22%", phone: "+91 95607 14048", instagram: "https://www.instagram.com/_savio.j/" },
-  { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: adityaPhoto, focus: "50% 30%", phone: "+91 93184 69083", instagram: "https://www.instagram.com/_.edith_01/" },
-  { name: "Aradhya Shakya", role: "Deputy Director General", photo: aradhyaPhoto, focus: "50% 25%", phone: "+91 98377 43436", instagram: "https://www.instagram.com/aradhya._.shakya/" },
-  { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto, focus: "48% 30%", phone: "+91 70657 74620", instagram: "https://www.instagram.com/wzz_.somyaahh/" },
-  { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto, focus: "50% 75%", phone: "+91 94569 19571", instagram: "https://www.instagram.com/_d.dishika._/" },
-  { name: "Mr. Vishal", role: "Teacher-in-Charge", photo: "/mr-vishal.png", focus: "50% 30%", phone: "+91 70115 43292", instagram: "https://www.instagram.com/vishalsingh_07_11/" },
+  {
+    name: "Savio Jose",
+    role: "Founder & Director General",
+    photo: savioPhoto,
+    focus: "50% 22%",
+    phone: "+91 95607 14048",
+    instagram: "https://www.instagram.com/_savio.j/",
+  },
+  {
+    name: "Aditya Kumar Singh",
+    role: "Founder & Secretary General",
+    photo: adityaPhoto,
+    focus: "50% 30%",
+    phone: "+91 93184 69083",
+    instagram: "https://www.instagram.com/_.edith_01/",
+  },
+  {
+    name: "Aradhya Shakya",
+    role: "Deputy Director General",
+    photo: aradhyaPhoto,
+    focus: "50% 25%",
+    phone: "+91 98377 43436",
+    instagram: "https://www.instagram.com/aradhya._.shakya/",
+  },
+  {
+    name: "Somya Yadav",
+    role: "Director General of Academics",
+    photo: somyaPhoto,
+    focus: "48% 30%",
+    phone: "+91 70657 74620",
+    instagram: "https://www.instagram.com/wzz_.somyaahh/",
+  },
+  {
+    name: "Dishika Yadav",
+    role: "Director General of Operations",
+    photo: dishikaPhoto,
+    focus: "50% 75%",
+    phone: "+91 94569 19571",
+    instagram: "https://www.instagram.com/_d.dishika._/",
+  },
+  {
+    name: "Mr. Vishal",
+    role: "Teacher-in-Charge",
+    photo: "/mr-vishal.png",
+    focus: "50% 30%",
+    phone: "+91 70115 43292",
+    instagram: "https://www.instagram.com/vishalsingh_07_11/",
+  },
 ];
 
 /** Add EB members per committee when announced, e.g. { committee: "UNGA", name: "...", role: "Chairperson", photo: null } */
-export const executiveBoard: { committee: string; name: string; role: string; photo: string | null }[] = [];
+export const executiveBoard: {
+  committee: string;
+  name: string;
+  role: string;
+  photo: string | null;
+}[] = [];
 
-export const schedule: { day: string; dress: string | null; items: { time: string | null; title: string; highlight?: boolean }[] }[] = [
+export const schedule: {
+  day: string;
+  dress: string | null;
+  items: { time: string | null; title: string; highlight?: boolean }[];
+}[] = [
   {
     day: "Day 01 | 18 November 2026",
     dress: "Traditional Indian",
@@ -192,7 +246,10 @@ export const faqs = [
     a: "United Nations General Assembly (UNGA), World Health Organization (WHO) and All India Political Parties Meet (AIPPM).",
   },
   { q: "What is the dress code?", a: "Day 1: Traditional Indian. Day 2: Western Formals." },
-  { q: "What are the agendas?", a: "UNGA: Addressing the Global Refugee Crisis with Special Emphasis on Equitable Responsibility-Sharing and Refugee Integration. WHO: Strengthening Global Health Security and Pandemic Response with Special Emphasis on Vaccine Equity and Early Outbreak Detection. AIPPM: Deliberation on India’s Response to Cross-Border Terrorism and Regional Security." },
+  {
+    q: "What are the agendas?",
+    a: "UNGA: Addressing the Global Refugee Crisis with Special Emphasis on Equitable Responsibility-Sharing and Refugee Integration. WHO: Strengthening Global Health Security and Pandemic Response with Special Emphasis on Vaccine Equity and Early Outbreak Detection. AIPPM: Deliberation on India’s Response to Cross-Border Terrorism and Regional Security.",
+  },
   { q: "When will the Executive Board be announced?", a: "To be announced." },
 ];
 
@@ -210,6 +267,10 @@ export const awards = [
   { title: "Best Delegate", count: "1 per committee", prize: "Trophy + Medal + Certificate" },
   { title: "High Commendation", count: "1 per committee", prize: "Medal + Certificate" },
   { title: "Special Mention", count: "3 per committee", prize: "Certificate" },
-  { title: "Verbal Mention", count: "Number varies according to committee size", prize: "Certificate" },
+  {
+    title: "Verbal Mention",
+    count: "Number varies according to committee size",
+    prize: "Certificate",
+  },
   { title: "Participation", count: "All remaining delegates", prize: "Certificate" },
 ];
