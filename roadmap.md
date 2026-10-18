@@ -2,3 +2,6 @@
 - [x] Add a first-edition Secretariat message and retain replaceable portraits.
 - [x] Route registration calls to a dedicated page, with fees only in registration areas and no invented form URL.
 - [x] Remove the fee-category statistic and verify mobile and desktop presentation.
+- [ ] Remove FAQ and update Secretariat photo, contact overlays, and Instagram icons.
+- [ ] Verify desktop/mobile photo interactions and site-wide scroll progress.
+- [ ] Check deployed website if an accessible deployment is available.
