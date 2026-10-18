@@ -141,7 +141,7 @@ export const secretariat: Person[] = [
   { name: "Aditya Kumar Singh", role: "Founder & Secretary General", photo: adityaPhoto, focus: "50% 30%", phone: "+91 93184 69083", instagram: "https://www.instagram.com/_.edith_01/" },
   { name: "Aradhya Shakya", role: "Deputy Director General", photo: aradhyaPhoto, focus: "50% 25%", phone: "+91 98377 43436", instagram: "https://www.instagram.com/aradhya._.shakya/" },
   { name: "Somya Yadav", role: "Director General of Academics", photo: somyaPhoto, focus: "48% 30%", phone: "+91 70657 74620", instagram: "https://www.instagram.com/wzz_.somyaahh/" },
-  { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto, focus: "50% 75%", phone: "+91 94569 19571", instagram: null },
+  { name: "Dishika Yadav", role: "Director General of Operations", photo: dishikaPhoto, focus: "50% 75%", phone: "+91 94569 19571", instagram: "https://www.instagram.com/_d.dishika._/" },
   { name: "Mr. Vishal", role: "Teacher-in-Charge", photo: "/mr-vishal.png", focus: "50% 30%", phone: "+91 70115 43292", instagram: null },
 ];
 
