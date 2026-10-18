@@ -554,7 +554,7 @@ function SecretariatCard({
         onFocus={(e) => {
           if (canHover && e.target.matches(":focus-visible")) onHover();
         }}
-        className="absolute inset-0 grid h-full w-full place-items-center overflow-hidden rounded-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+        className="absolute inset-0 grid h-full w-full place-items-center overflow-hidden rounded-none p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
       >
         {p.photo ? (
           <img src={p.photo} alt={p.name} loading="lazy" style={{ objectPosition: p.focus }} data-color={!dimmed} className="portrait h-full w-full object-cover" />
