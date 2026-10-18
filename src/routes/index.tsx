@@ -71,6 +71,8 @@ function Index() {
 /* ---------------- helpers ---------------- */
 
 const REG_URL = conference.registrationUrl ?? "/register";
+/** Top-bar menu links — Committees is deliberately not offered in the header. */
+const topBarLinks = navLinks.filter((l) => l.href !== "#committees");
 
 function SectionHead({
   index,
@@ -131,7 +133,7 @@ function Nav() {
           <span className="eyebrow text-gold">MUN</span>
         </a>
         <nav className="hidden items-center gap-4 xl:gap-5 lg:flex">
-          {navLinks.map((l) => (
+          {topBarLinks.map((l) => (
             <a key={l.href} href={l.href} className="eyebrow link-underline text-[0.62rem] tracking-[0.22em] text-ivory/75 hover:text-ivory">
               {l.label}
             </a>
@@ -158,7 +160,7 @@ function Nav() {
       >
         <Container className="flex min-h-full flex-col justify-between gap-8 pb-10 pt-8">
           <ul className="space-y-1">
-            {navLinks.map((l, i) => (
+            {topBarLinks.map((l, i) => (
               <li key={l.href} className="border-b border-line-dark">
                 <a
                   href={l.href}
