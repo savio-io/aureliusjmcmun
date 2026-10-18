@@ -2,3 +2,6 @@
 - [x] Add a first-edition Secretariat message and retain replaceable portraits.
 - [x] Route registration calls to a dedicated page, with fees only in registration areas and no invented form URL.
 - [x] Remove the fee-category statistic and verify mobile and desktop presentation.
+- [x] Remove FAQ and update Secretariat photo, contact overlays, and Instagram icons.
+- [x] Verify desktop/mobile photo interactions and site-wide scroll progress.
+- [ ] Verify deployed Vercel website — blocked: no Vercel URL supplied; current Lovable public address returns “No published build”.

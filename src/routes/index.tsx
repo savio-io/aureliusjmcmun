@@ -19,9 +19,9 @@ import {
   secretariat,
   executiveBoard,
   schedule,
-  faqs,
   navLinks,
 } from "@/data/conference";
+import { PORTRAIT_COLOR_DURATION_MS } from "@/lib/presentation-rules";
 import { useRevealAll } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
@@ -62,7 +62,6 @@ function Index() {
       <ExecutiveBoard />
       <Schedule />
       <Awards />
-      <Faq />
       <Contact />
       <Footer />
     </div>
@@ -533,21 +532,8 @@ function useCanHover() {
   return can;
 }
 
-/** "@handle" read straight from an Instagram profile URL. */
-function instagramHandle(url: string) {
-  const match = url.match(/instagram\.com\/([^/?#]+)/i);
-  return match ? `@${match[1]}` : null;
-}
-
 function SecretariatCard({
-
-  p,
-  i,
-  active,
-  dimmed,
-  canHover,
-  onHover,
-  onToggle,
+  p, i, active, dimmed, canHover, onHover, onToggle,
 }: {
   p: (typeof secretariat)[number];
   i: number;
@@ -558,57 +544,39 @@ function SecretariatCard({
   onToggle: () => void;
 }) {
   return (
-    <figure className="reveal group" style={{ transitionDelay: `${(i % 3) * 120}ms` }}>
-      <button
+    <figure className="reveal group relative isolate aspect-[4/5] overflow-hidden bg-ink" style={{ transitionDelay: `${(i % 3) * 120}ms` }} onMouseEnter={canHover ? onHover : undefined}>
+      <Button
+        variant="bare"
         type="button"
         aria-pressed={active}
         aria-label={`Emphasise ${p.name}'s photograph`}
         onClick={canHover ? undefined : onToggle}
-        onMouseEnter={canHover ? onHover : undefined}
         onFocus={(e) => {
-          if ((e.target as HTMLElement).matches(":focus-visible")) onHover();
+          if (canHover && e.target.matches(":focus-visible")) onHover();
         }}
-        className="surface-dark relative mx-auto grid aspect-[4/5] w-full max-w-[15rem] place-items-center overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold min-[340px]:max-w-none"
+        className="absolute inset-0 grid h-full w-full place-items-center overflow-hidden rounded-none p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
       >
         {p.photo ? (
-          <img
-            src={p.photo}
-            alt={p.name}
-            loading="lazy"
-            style={{ objectPosition: p.focus }}
-            data-color={!dimmed}
-            className="portrait h-full w-full object-cover"
-          />
-        ) : (
-          <Initials name={p.name} />
-        )}
-      </button>
-      <figcaption className="mx-auto mt-3 min-w-0 max-w-[15rem] border-t border-border pt-3 sm:mt-6 sm:pt-5 min-[340px]:max-w-none">
-        <p className="display break-words text-xl leading-tight sm:text-3xl">{p.name}</p>
-        <p className="eyebrow mt-2 break-words text-[0.6rem] leading-snug text-muted-foreground sm:text-xs">{p.role}</p>
+          <img src={p.photo} alt={p.name} loading="lazy" style={{ objectPosition: p.focus }} data-color={!dimmed} className="portrait h-full w-full object-cover" />
+        ) : <Initials name={p.name} />}
+      </Button>
+      <figcaption className="secretariat-overlay pointer-events-none absolute inset-x-0 bottom-0 z-10 px-5 pb-4 pt-12 text-ivory sm:px-4 sm:pb-3 lg:px-5 lg:pb-4">
+        <p className="display break-words text-3xl leading-tight sm:text-2xl lg:text-3xl">{p.name}</p>
+        <p className="mt-1 break-words text-[0.65rem] font-semibold uppercase leading-snug text-gold sm:text-[0.6rem] lg:text-[0.65rem]">{p.role}</p>
         {(p.phone || p.instagram) && (
-          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 sm:mt-3">
+          <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1">
             {p.phone && (
-              <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 transition-colors hover:text-gold sm:gap-2 sm:text-sm">
-                <Phone size={14} className="shrink-0 text-gold" />
-                {p.phone}
+              <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="pointer-events-auto inline-flex min-h-11 items-center gap-2 whitespace-nowrap text-xs text-ivory/90 transition-colors hover:text-gold" onClick={(e) => e.stopPropagation()}>
+                <Phone size={14} className="shrink-0 text-gold" aria-hidden="true" />{p.phone}
               </a>
             )}
-            {p.instagram && instagramHandle(p.instagram) && (
-              <a
-                href={p.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open ${p.name}'s Instagram: ${instagramHandle(p.instagram)}`}
-                className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-xs text-foreground/80 transition-colors hover:text-gold sm:gap-2 sm:text-sm"
-              >
-                <Instagram size={14} className="shrink-0 text-gold" aria-hidden="true" />
-                {instagramHandle(p.instagram)}
+            {p.instagram && (
+              <a href={p.instagram} target="_blank" rel="noopener noreferrer" aria-label={`Open ${p.name}'s Instagram`} title={`${p.name} on Instagram`} onClick={(e) => e.stopPropagation()} className="pointer-events-auto inline-flex h-11 w-11 shrink-0 items-center justify-center text-gold transition-colors hover:text-ivory">
+                <Instagram size={18} aria-hidden="true" />
               </a>
             )}
           </div>
         )}
-
       </figcaption>
     </figure>
   );
@@ -669,7 +637,7 @@ function SecretariatGrid() {
     touchTimer.current = window.setTimeout(() => {
       setTouchActive(null);
       touchTimer.current = null;
-    }, 2000);
+    }, PORTRAIT_COLOR_DURATION_MS);
   };
 
   // Clean up the timer if the gallery unmounts so no photo stays coloured.
@@ -688,7 +656,7 @@ function SecretariatGrid() {
   return (
     <div
       ref={gridRef}
-      className="grid grid-cols-1 gap-y-8 min-[340px]:grid-cols-2 min-[340px]:gap-x-3 sm:gap-10 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3"
       onMouseLeave={canHover ? () => setActive(null) : undefined}
     >
       {secretariat.map((p, i) => (
@@ -696,7 +664,7 @@ function SecretariatGrid() {
           key={p.name}
           p={p}
           i={i}
-          active={active === i}
+          active={canHover ? active === i : touchActive === i}
           dimmed={canHover === null ? false : canHover ? active !== null && active !== i : touchActive !== i}
           canHover={!!canHover}
           onHover={() => setActive(i)}
@@ -807,46 +775,6 @@ function Schedule() {
               </ul>
             </div>
           ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------------- FAQ ---------------- */
-
-function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
-  return (
-    <section id="faq" className="surface-dark py-24 md:py-36">
-      <Container className="grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <SectionHead index="IX" label="FAQ" title={<>Questions</>} dark />
-        </div>
-        <div className="lg:col-span-8">
-          {faqs.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <div key={f.q} className="reveal border-b border-line-dark first:border-t">
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-6 py-6 text-left"
-                >
-                  <span className="display text-2xl md:text-3xl">{f.q}</span>
-                  <span className={`relative h-4 w-4 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`}>
-                    <span className="absolute left-0 top-1/2 h-px w-4 bg-gold" />
-                    <span className="absolute left-1/2 top-0 h-4 w-px bg-gold" />
-                  </span>
-                </button>
-                <div className={`grid transition-all duration-500 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                  <div className="overflow-hidden">
-                    <p className="max-w-2xl pb-8 text-ivory/70">{f.a}</p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </Container>
     </section>

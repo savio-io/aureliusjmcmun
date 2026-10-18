@@ -4,15 +4,19 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, useRef, type ReactNode } from "react";
 
+import { scrollProgress } from "@/lib/presentation-rules";
+
 /** Thin golden scroll-progress bar fixed to the top edge, site-wide. */
 function ScrollProgress() {
   const barRef = useRef<HTMLDivElement>(null);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
     let raf = 0;
@@ -21,8 +25,7 @@ function ScrollProgress() {
       const el = barRef.current;
       if (!el) return;
       const doc = document.documentElement;
-      const scrollable = doc.scrollHeight - window.innerHeight;
-      const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+      const progress = scrollProgress(window.scrollY, doc.scrollHeight, window.innerHeight);
       el.style.transform = `scaleX(${progress})`;
     };
     const request = () => {
@@ -33,13 +36,14 @@ function ScrollProgress() {
     window.addEventListener("resize", request);
     const observer = new ResizeObserver(request);
     observer.observe(document.documentElement);
+    observer.observe(document.body);
     return () => {
       window.removeEventListener("scroll", request);
       window.removeEventListener("resize", request);
       observer.disconnect();
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] bg-foreground/10">
