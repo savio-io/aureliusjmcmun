@@ -789,7 +789,6 @@ function Contact() {
     { label: "Official email", value: c.email, href: c.email ? `mailto:${c.email}` : null, external: false },
     { label: "Instagram", value: c.instagram ? "@aureliusjmcmun" : null, href: c.instagram, external: true },
     { label: "Phone", value: c.phone, href: c.phone ? `tel:${c.phone.replace(/\s/g, "")}` : null, external: false },
-    { label: "Teacher In-Charge · Additional", value: c.teacherPhone, href: c.teacherPhone ? `tel:${c.teacherPhone.replace(/\s/g, "")}` : null, external: false },
     { label: "Location", value: "Open in Google Maps", href: conference.venue.mapsUrl, external: true },
   ];
   return (
@@ -866,7 +865,6 @@ function Footer() {
               <li>Instagram — {conference.contact.instagram ? <a className="link-underline" href={conference.contact.instagram} target="_blank" rel="noopener noreferrer">Follow</a> : "TBA"}</li>
               <li>Email — {conference.contact.email ? <a className="link-underline" href={`mailto:${conference.contact.email}`}>{conference.contact.email}</a> : "TBA"}</li>
               <li>Phone — {conference.contact.phone ? <a className="link-underline" href={`tel:${conference.contact.phone.replace(/\s/g, "")}`}>{conference.contact.phone}</a> : "TBA"}</li>
-              <li>Teacher In-Charge · Additional — {conference.contact.teacherPhone ? <a className="link-underline" href={`tel:${conference.contact.teacherPhone.replace(/\s/g, "")}`}>{conference.contact.teacherPhone}</a> : "TBA"}</li>
             </ul>
             <Button asChild variant="bare" className="btn-gold mt-8"><a href={REG_URL} target="_blank" rel="noopener noreferrer">Register Now</a></Button>
           </div>
